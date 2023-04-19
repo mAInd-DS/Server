@@ -11,7 +11,7 @@ public class ProfilesResponseDto {
     private String career;
     private String education;
     private String content;
-    private String author;
+    private String counselor_id;
 
     public ProfilesResponseDto(Profiles entity){
         this.counselor_profile_id = entity.getCounselor_profile_id();
@@ -19,6 +19,6 @@ public class ProfilesResponseDto {
         this.career = entity.getCareer();
         this.education = entity.getEducation();
         this.content = entity.getContent();
-        this.author = entity.getAuthor();
+        this.counselor_id = entity.getCounselor_id();
     }
 }

@@ -28,15 +28,15 @@ public class Profiles extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    private String author;
+    private String counselor_id;
 
     @Builder //해당 클래스의 빌더 패턴 클래스를 생성
-    public Profiles(String title, String career, String education, String content, String author){
+    public Profiles(String title, String career, String education, String content, String counselor_id){
         this.title = title;
         this.career = career;
         this.education = education;
         this.content = content;
-        this.author = author;
+        this.counselor_id = counselor_id;
     }
 
     public void update(String title, String career, String education, String content){

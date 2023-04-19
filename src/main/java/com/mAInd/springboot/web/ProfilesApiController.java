@@ -13,17 +13,17 @@ public class ProfilesApiController {
 
     private final ProfilesService profilesService;
 
-    @PostMapping("/api/v1/profiles")
+    @PostMapping("/profiles")
     public Long save(@RequestBody ProfilesSaveRequestDto requestDto){
         return profilesService.save(requestDto);
     }
 
-    @PutMapping("/api/v1/profiles/{id}")
+    @PutMapping("/profiles/{id}")
     public Long update(@PathVariable Long id, @RequestBody ProfilesUpdateRequestDto requestDto){
         return profilesService.update(id, requestDto);
     }
 
-    @GetMapping("/api/v1/profiles/{id}")
+    @GetMapping("/profiles/{id}")
     public ProfilesResponseDto findById (@PathVariable Long id){
         return profilesService.findById(id);
     }

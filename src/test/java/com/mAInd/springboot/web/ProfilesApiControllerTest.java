@@ -53,7 +53,7 @@ public class ProfilesApiControllerTest {
                 .content(content)
                 .build();
 
-        String url = "http://localhost:" + port + "/api/v1/profiles";
+        String url = "http://localhost:" + port + "/profiles";
 
         //when
         ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
@@ -77,7 +77,7 @@ public class ProfilesApiControllerTest {
                 .career("career")
                 .education("education")
                 .content("content")
-                .author("author")
+                .counselor_id("counselor_id")
                 .build());
 
         Long updateId = savedProfiles.getCounselor_profile_id();
@@ -94,7 +94,7 @@ public class ProfilesApiControllerTest {
                         .content(expectedContent)
                         .build();
 
-        String url = "http://localhost:" + port + "/api/v1/profiles/" + updateId;
+        String url = "http://localhost:" + port + "/profiles/" + updateId;
 
         HttpEntity<ProfilesUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
 

@@ -11,15 +11,15 @@ public class ProfilesSaveRequestDto {
     private String career;
     private String education;
     private String content;
-    private String author;
+    private String counselor_id;
 
     @Builder
-    public ProfilesSaveRequestDto(String title, String career, String education, String content, String author){
+    public ProfilesSaveRequestDto(String title, String career, String education, String content, String counselor_id){
         this.title = title;
         this.career = career;
         this.education = education;
         this.content = content;
-        this.author = author;
+        this.counselor_id = counselor_id;
     }
 
     public Profiles toEntity(){
@@ -28,7 +28,7 @@ public class ProfilesSaveRequestDto {
                 .career(career)
                 .education(education)
                 .content(content)
-                .author(author)
+                .counselor_id(counselor_id)
                 .build();
     }
 }

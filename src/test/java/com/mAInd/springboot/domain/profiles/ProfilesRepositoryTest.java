@@ -37,7 +37,7 @@ public class ProfilesRepositoryTest {
                 .career(career)
                 .education(education)
                 .content(content)
-                .author("abc@gmail.com")
+                .counselor_id("abc@gmail.com")
                 .build());
 
         //when
@@ -60,7 +60,7 @@ public class ProfilesRepositoryTest {
                 .career("career")
                 .education("education")
                 .content("content")
-                .author("author")
+                .counselor_id("counselor_id")
                 .build());
 
         //when
