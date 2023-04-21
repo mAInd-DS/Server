@@ -1,4 +1,4 @@
 .gradle
 .idea
 .env
-\src\main\resources\gcp_stt_key.json
+src/main/resources/gcp_stt_key.json
