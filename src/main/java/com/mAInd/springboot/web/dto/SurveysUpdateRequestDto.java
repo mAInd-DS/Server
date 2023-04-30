@@ -1,7 +1,6 @@
 package com.mAInd.springboot.web.dto;
 
-import com.google.type.DateTime;
-import com.mAInd.springboot.domain.Surveys.Gender;
+import com.mAInd.springboot.domain.surveys.Gender;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

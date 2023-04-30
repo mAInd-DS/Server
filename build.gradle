@@ -38,5 +38,9 @@ dependencies {
     implementation('com.google.cloud:google-cloud-speech:4.9.0')
     implementation('org.springframework.boot:spring-boot-configuration-processor')
 
+    implementation('org.springframework.boot:spring-boot-starter-oauth2-client')
+
+    implementation('org.springframework.session:spring-session-jdbc')
+
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 }

@@ -23,6 +23,12 @@ public class ProfilesApiController {
         return profilesService.update(id, requestDto);
     }
 
+    @DeleteMapping("/profiles/{id}")
+    public Long delete(@PathVariable Long id) {
+        profilesService.delete(id);
+        return id;
+    }
+
     @GetMapping("/profiles/{id}")
     public ProfilesResponseDto findById (@PathVariable Long id){
         return profilesService.findById(id);

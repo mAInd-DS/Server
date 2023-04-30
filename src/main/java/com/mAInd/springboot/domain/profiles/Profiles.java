@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Profiles extends BaseTimeEntity {
 
     @Id //pk
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //pk생성규칙
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //pk생성규칙, auto_increment
     private Long counselor_profile_id;
 
     @Column(length=500, nullable = false)

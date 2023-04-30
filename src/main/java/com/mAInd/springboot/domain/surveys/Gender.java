@@ -1,4 +1,4 @@
-package com.mAInd.springboot.domain.Surveys;
+package com.mAInd.springboot.domain.surveys;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,8 +6,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum Gender {
-    M("³²ÀÚ"),
-    F("¿©ÀÚ");
+    M("ë‚¨ì„±"),
+    F("ì—¬ì„±");
 
     private String description;
 }

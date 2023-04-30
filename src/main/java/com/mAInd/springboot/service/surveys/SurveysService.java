@@ -1,7 +1,7 @@
 package com.mAInd.springboot.service.surveys;
 
-import com.mAInd.springboot.domain.Surveys.Surveys;
-import com.mAInd.springboot.domain.Surveys.SurveysRepository;
+import com.mAInd.springboot.domain.surveys.Surveys;
+import com.mAInd.springboot.domain.surveys.SurveysRepository;
 import com.mAInd.springboot.web.dto.SurveysResponseDto;
 import com.mAInd.springboot.web.dto.SurveysSaveRequestDto;
 import com.mAInd.springboot.web.dto.SurveysUpdateRequestDto;
@@ -24,7 +24,7 @@ public class SurveysService {
     public Long update(Long id, SurveysUpdateRequestDto requestDto){
         Surveys surveys = surveysRepository.findById(id)
                 .orElseThrow(() -> new
-                        IllegalArgumentException("ÇØ´ç ¼³¹®Áö°¡ ¾ø½À´Ï´Ù. id="+id));
+                        IllegalArgumentException("ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. id="+id));
         surveys.update(requestDto.getName(),requestDto.getGender(), requestDto.getEmail(),
                 requestDto.getBirth(), requestDto.getPhone(), requestDto.getEducation(),
                 requestDto.getQ_1(), requestDto.getQ_2(), requestDto.getQ_3(),
@@ -39,7 +39,7 @@ public class SurveysService {
     public SurveysResponseDto findById(Long id){
         Surveys entity = surveysRepository.findById(id)
                 .orElseThrow(()-> new
-                        IllegalArgumentException("ÇØ´ç ¼³¹®Áö°¡ ¾ø½À´Ï´Ù.id=" + id));
+                        IllegalArgumentException("ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.id=" + id));
         return new SurveysResponseDto(entity);
     }
 

@@ -1,7 +1,6 @@
-package com.mAInd.springboot.domain.Surveys;
+package com.mAInd.springboot.domain.surveys;
 
 
-import com.google.type.DateTime;
 import com.mAInd.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;

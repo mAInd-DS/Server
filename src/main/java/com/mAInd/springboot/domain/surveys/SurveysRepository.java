@@ -1,4 +1,4 @@
-package com.mAInd.springboot.domain.Surveys;
+package com.mAInd.springboot.domain.surveys;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

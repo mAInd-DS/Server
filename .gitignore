@@ -2,3 +2,4 @@
 .idea
 .env
 src/main/resources/gcp_stt_key.json
+application-oauth.properties
