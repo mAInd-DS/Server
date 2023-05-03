@@ -24,7 +24,7 @@ public class SurveysService {
     public Long update(Long id, SurveysUpdateRequestDto requestDto){
         Surveys surveys = surveysRepository.findById(id)
                 .orElseThrow(() -> new
-                        IllegalArgumentException("�ش� �������� �����ϴ�. id="+id));
+                        IllegalArgumentException("해당 사용자가 없습니다"+id));
         surveys.update(requestDto.getName(),requestDto.getGender(), requestDto.getEmail(),
                 requestDto.getBirth(), requestDto.getPhone(), requestDto.getEducation(),
                 requestDto.getQ_1(), requestDto.getQ_2(), requestDto.getQ_3(),
@@ -36,10 +36,17 @@ public class SurveysService {
         return id;
     }
 
+    @Transactional
+    public void delete(Long id){
+        Surveys surveys = surveysRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" +id));
+        surveysRepository.delete(surveys);
+    }
+
     public SurveysResponseDto findById(Long id){
         Surveys entity = surveysRepository.findById(id)
                 .orElseThrow(()-> new
-                        IllegalArgumentException("�ش� �������� �����ϴ�.id=" + id));
+                        IllegalArgumentException("해당 설문지가 없습니다." + id));
         return new SurveysResponseDto(entity);
     }
 

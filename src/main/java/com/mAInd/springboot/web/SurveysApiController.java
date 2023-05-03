@@ -23,6 +23,12 @@ public class SurveysApiController {
         return surveysService.update(id, requestDto);
     }
 
+    @DeleteMapping("/surveys/{id}")
+    public Long delete(@PathVariable Long id){
+        surveysService.delete(id);
+        return id;
+    }
+
     @GetMapping("/surveys/{id}")
     public SurveysResponseDto findById(@PathVariable Long id){
         return surveysService.findById(id);
