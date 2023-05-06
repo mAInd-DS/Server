@@ -20,32 +20,33 @@ public class ProfilesService {
 
     @Transactional
     public Long save(ProfilesSaveRequestDto requestDto){
-        return profilesRepository.save(requestDto.toEntity()).getCounselor_profile_id();
+        return profilesRepository.save(requestDto.toEntity()).getProfile_id();
     }
 
     @Transactional
-    public Long update(Long id, ProfilesUpdateRequestDto requestDto){
-        Profiles profiles = profilesRepository.findById(id)
+    public Long update(Long profile_id, ProfilesUpdateRequestDto requestDto){
+        Profiles profiles = profilesRepository.findById(profile_id)
                 .orElseThrow(() -> new
-                        IllegalArgumentException("해당 게시글이 없습니다. id="+id));
+                        IllegalArgumentException("해당 게시글이 없습니다. profile_id="+profile_id));
         profiles.update(requestDto.getTitle(), requestDto.getCareer(), requestDto.getEducation(),
                 requestDto.getContent());
 
-        return id;
+        return profile_id;
     }
 
     @Transactional
-    public void delete (Long id) {
-        Profiles profiles = profilesRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
+    public void delete (Long profile_id) {
+        Profiles profiles = profilesRepository.findById(profile_id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. profile_id=" + profile_id));
 
         profilesRepository.delete(profiles);
     }
 
-    public ProfilesResponseDto findById(Long id){
-        Profiles entity = profilesRepository.findById(id)
+    @Transactional(readOnly = true)
+    public ProfilesResponseDto findById(Long profile_id){
+        Profiles entity = profilesRepository.findById(profile_id)
                 .orElseThrow(()-> new
-                        IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
+                        IllegalArgumentException("해당 게시글이 없습니다. profile_id=" + profile_id));
         return new ProfilesResponseDto(entity);
     }
 

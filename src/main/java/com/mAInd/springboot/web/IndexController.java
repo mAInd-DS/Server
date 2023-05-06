@@ -3,10 +3,12 @@ package com.mAInd.springboot.web;
 import com.mAInd.springboot.config.auth.LoginUser;
 import com.mAInd.springboot.config.auth.dto.SessionUser;
 import com.mAInd.springboot.service.profiles.ProfilesService;
+import com.mAInd.springboot.web.dto.ProfilesResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 import javax.servlet.http.HttpSession;
@@ -27,10 +29,18 @@ public class IndexController {
        return "index";
     }
 
-    //작동 안함;
     @GetMapping("/profiles/save")
     public String profilesSave(){
         return "profiles-save";
     }
+
+    @GetMapping("/profiles/update/{profile_id}")
+    public String profilesUpdate(@PathVariable Long profile_id, Model model){
+        ProfilesResponseDto dto = profilesService.findById(profile_id);
+        model.addAttribute("profile", dto);
+
+        return "profiles-update";
+    }
+
 
 }

@@ -14,7 +14,7 @@ public class Profiles extends BaseTimeEntity {
 
     @Id //pk
     @GeneratedValue(strategy = GenerationType.IDENTITY) //pk생성규칙, auto_increment
-    private Long counselor_profile_id;
+    private Long profile_id;
 
     @Column(length=500, nullable = false)
     private String title;
@@ -28,15 +28,12 @@ public class Profiles extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    private String counselor_id;
-
     @Builder //해당 클래스의 빌더 패턴 클래스를 생성
-    public Profiles(String title, String career, String education, String content, String counselor_id){
+    public Profiles(String title, String career, String education, String content){
         this.title = title;
         this.career = career;
         this.education = education;
         this.content = content;
-        this.counselor_id = counselor_id;
     }
 
     public void update(String title, String career, String education, String content){

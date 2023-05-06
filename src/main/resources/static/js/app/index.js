@@ -16,7 +16,9 @@ var main = {
     save : function () {
         var data = {
             title: $('#title').val(),
-            author: $('#counselor_id').val(),
+            profile_id: $('#profile_id').val(),
+            career: $('#career').val(),
+            education: $('#education').val(),
             content: $('#content').val()
         };
 
@@ -36,14 +38,16 @@ var main = {
     update : function () {
         var data = {
             title: $('#title').val(),
+            career: $('#career').val(),
+            education: $('#education').val(),
             content: $('#content').val()
         };
 
-        var id = $('#id').val();
+        var profile_id = $('#profile_id').val();
 
         $.ajax({
             type: 'PUT',
-            url: '/profiles/'+id,
+            url: '/profiles/'+profile_id,
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
@@ -55,11 +59,11 @@ var main = {
         });
     },
     delete : function () {
-        var id = $('#id').val();
+        var profile_id = $('#profile_id').val();
 
         $.ajax({
             type: 'DELETE',
-            url: '/profiles/'+id,
+            url: '/profiles/'+profile_id,
             dataType: 'json',
             contentType:'application/json; charset=utf-8'
         }).done(function() {

@@ -1,7 +1,7 @@
 package com.mAInd.springboot.config.auth.dto;
 
 import com.mAInd.springboot.domain.user.Role;
-import com.mAInd.springboot.domain.user.User;
+import com.mAInd.springboot.domain.user.Users;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -46,8 +46,8 @@ public class OAuthAttributes {
     //OAuthAttributes에서 엔티티를 생성하는 시점은 처음 가입할 때
     //가입할 때의 기본 권한을 CLIENT로 줌
     //OAuthAttributes 클래스 생성이 끝나면 같은 패키지에 SessionUser 클래스를 생성함
-    public User toEntity() {
-        return User.builder()
+    public Users toEntity() {
+        return Users.builder()
                 .name(name)
                 .email(email)
                 .picture(picture)

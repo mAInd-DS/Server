@@ -77,7 +77,6 @@ public class ProfilesApiControllerTest {
                 .career("career")
                 .education("education")
                 .content("content")
-                .counselor_id("counselor_id")
                 .build());
 
         Long updateId = savedProfiles.getCounselor_profile_id();

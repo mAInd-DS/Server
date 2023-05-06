@@ -1,10 +1,12 @@
 package com.mAInd.springboot.config;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.CacheControl;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import java.util.concurrent.TimeUnit;
 
+@Configuration
 public class MvcConfiguration implements org.springframework.web.servlet.config.annotation.WebMvcConfigurer {
 
     @Override

@@ -1,6 +1,7 @@
 package com.mAInd.springboot.domain.user;
 
 import com.mAInd.springboot.domain.BaseTimeEntity;
+import com.mAInd.springboot.domain.profiles.Profiles;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,10 +11,10 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class User extends BaseTimeEntity {
+public class Users extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long user_id;
 
     @Column(nullable = false)
     private String name;
@@ -28,15 +29,19 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private Role role;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="profile_id", referencedColumnName = "profile_id")
+    private Profiles profile_id;
+
     @Builder
-    public User(String name, String email, String picture, Role role){
+    public Users(String name, String email, String picture, Role role){
         this.name = name;
         this.email = email;
         this.picture = picture;
         this.role = role;
     }
 
-    public User update(String name, String picture){
+    public Users update(String name, String picture){
         this.name = name;
         this.picture = picture;
 
