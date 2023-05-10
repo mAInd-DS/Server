@@ -25,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**").permitAll()
 //                    .antMatchers("/profiles/**").hasRole(Role.COUNSELOR.name())
                     .antMatchers("/profiles/**").permitAll()
+                    .antMatchers("/mypage/**").permitAll()
                     //anyRequest: 설정된 값들 이외 나머지 url들
                     //여기서는 나머지 url들은 모두 인증된 사용자들에게만 허용케 함(로그인한 사용자들)
                     .anyRequest().authenticated()

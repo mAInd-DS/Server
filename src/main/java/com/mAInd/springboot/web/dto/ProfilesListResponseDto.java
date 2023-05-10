@@ -3,6 +3,7 @@ package com.mAInd.springboot.web.dto;
 import com.mAInd.springboot.domain.profiles.Profiles;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -12,7 +13,7 @@ public class ProfilesListResponseDto {
     private String career;
     private String education;
     private String content;
-    private LocalDateTime modifiedDate;
+    private LocalDate modifiedDate;
 
     public ProfilesListResponseDto(Profiles entity){
         this.profile_id = entity.getProfile_id();

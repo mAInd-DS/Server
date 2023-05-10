@@ -49,18 +49,15 @@ public class Surveys extends BaseTimeEntity {
     private String q_9;
     private String q_10;
     private String q_11;
-    private String q_12;
-    private String q_13;
-    private String q_14;
 
+    @Column(nullable = true)
     private Long client_id;
 
     @Builder
     public Surveys(String name, Gender gender, String email, Date birth,
                    String phone, String education, String q_1, String q_2,
                    String q_3, String q_4, String q_5, String q_6, String q_7,
-                   String q_8, String q_9, String q_10, String q_11, String q_12,
-                   String q_13, String q_14, Long client_id) {
+                   String q_8, String q_9, String q_10, String q_11, Long client_id) {
         this.name = name;
         this.gender = gender;
         this.email = email;
@@ -78,17 +75,13 @@ public class Surveys extends BaseTimeEntity {
         this.q_9 = q_9;
         this.q_10 = q_10;
         this.q_11 = q_11;
-        this.q_12 = q_12;
-        this.q_13 = q_13;
-        this.q_14 = q_14;
         this.client_id = client_id;
     }
 
     public void update(String name, Gender gender, String email, Date birth,
                        String phone, String education, String q_1, String q_2,
                        String q_3, String q_4, String q_5, String q_6, String q_7,
-                       String q_8, String q_9, String q_10, String q_11, String q_12,
-                       String q_13, String q_14){
+                       String q_8, String q_9, String q_10, String q_11){
         this.name = name;
         this.gender = gender;
         this.email = email;
@@ -106,9 +99,6 @@ public class Surveys extends BaseTimeEntity {
         this.q_9 = q_9;
         this.q_10 = q_10;
         this.q_11 = q_11;
-        this.q_12 = q_12;
-        this.q_13 = q_13;
-        this.q_14 = q_14;
     }
 
 }

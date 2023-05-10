@@ -1,0 +1,38 @@
+{{>layout/header}}
+
+<h1>mAInd 홈페이지</h1>
+<div class="col-md-12">
+    <!--로그인 기능 영역-->
+    <div class="row">
+        <div class="col-md-6">
+            <a href="/mypage/surveys/save" role="button" class="btn btn-primary">초기 설문지 작성</a>
+            {{#userNameIs}}
+                Logged in as: <span id="user">{{userNameIs}}</span>
+                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+            {{/userNameIs}}
+            {{^userNameIs}}
+                <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
+            {{/userNameIs}}
+        </div>
+    </div>
+    <br>
+    <!-- 목록 출력 영역 -->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>초기설문지</th>
+            <th>최종수정일</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#surveys}}
+            <tr>
+                <td><a href="/surveys/update/{{surveys_id}}">{{name}}</a></td>
+                <td>{{modifiedDate}}</td>
+            </tr>
+        {{/surveys}}
+        </tbody>
+    </table>
+</div>
+
+{{>layout/footer-survey}}

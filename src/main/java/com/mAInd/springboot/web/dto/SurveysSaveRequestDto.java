@@ -11,7 +11,6 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 public class SurveysSaveRequestDto {
-    private Long survey_id;
     private String name;
     private Gender gender;
     private String email;
@@ -29,16 +28,12 @@ public class SurveysSaveRequestDto {
     private String q_9;
     private String q_10;
     private String q_11;
-    private String q_12;
-    private String q_13;
-    private String q_14;
 
     @Builder
     public SurveysSaveRequestDto(String name, Gender gender, String email, Date birth,
                                  String phone, String education, String q_1, String q_2,
                                  String q_3, String q_4, String q_5, String q_6, String q_7,
-                                 String q_8, String q_9, String q_10, String q_11, String q_12,
-                                 String q_13, String q_14){
+                                 String q_8, String q_9, String q_10, String q_11){
         this.name = name;
         this.gender = gender;
         this.email = email;
@@ -56,9 +51,6 @@ public class SurveysSaveRequestDto {
         this.q_9 = q_9;
         this.q_10 = q_10;
         this.q_11 = q_11;
-        this.q_12 = q_12;
-        this.q_13 = q_13;
-        this.q_14 = q_14;
     }
 
     public Surveys toEntity(){
@@ -80,9 +72,6 @@ public class SurveysSaveRequestDto {
                 .q_9(q_9)
                 .q_10(q_10)
                 .q_11(q_11)
-                .q_12(q_12)
-                .q_13(q_13)
-                .q_14(q_14)
                 .build();
     }
 }
