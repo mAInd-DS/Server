@@ -1,11 +1,14 @@
 package com.mAInd.springboot.web;
 
 import com.mAInd.springboot.service.surveys.SurveysService;
+import com.mAInd.springboot.web.dto.SurveysListResponseDto;
 import com.mAInd.springboot.web.dto.SurveysResponseDto;
 import com.mAInd.springboot.web.dto.SurveysSaveRequestDto;
 import com.mAInd.springboot.web.dto.SurveysUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -32,5 +35,10 @@ public class SurveysApiController {
     @GetMapping("/mypage/surveys/{survey_id}")
     public SurveysResponseDto findById(@PathVariable Long survey_id){
         return surveysService.findById(survey_id);
+    }
+
+    @GetMapping("/mypage/surveys/list")
+    public List<SurveysListResponseDto> findAll(){
+        return surveysService.findAllDesc();
     }
 }

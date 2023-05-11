@@ -20,14 +20,16 @@
     <table class="table table-horizontal table-bordered">
         <thead class="thead-strong">
         <tr>
-            <th>초기설문지</th>
+            <th>초기 설문지 id</th>
+            <th>작성자</th>
             <th>최종수정일</th>
         </tr>
         </thead>
         <tbody id="tbody">
         {{#surveys}}
             <tr>
-                <td><a href="/surveys/update/{{surveys_id}}">{{name}}</a></td>
+                <td>{{survey_id}}</td>
+                <td><a href="/mypage/surveys/update/{{surveys_id}}">{{name}}</a></td>
                 <td>{{modifiedDate}}</td>
             </tr>
         {{/surveys}}

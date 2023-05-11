@@ -43,7 +43,7 @@ var main = {
             data: JSON.stringify(data)
         }).done(function() {
             alert('설문지가 등록되었습니다.');
-            window.location.href = '/';
+            window.location.href = '/mypage';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });

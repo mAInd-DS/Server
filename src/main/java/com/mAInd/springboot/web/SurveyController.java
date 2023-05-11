@@ -21,7 +21,7 @@ public class SurveyController {
 
     @GetMapping("/mypage")
     public String mypage(Model model, @LoginUser SessionUser user){
-        model.addAttribute("surveys");
+        model.addAttribute("surveys", surveysService.findAllDesc());
         if(user != null){
             model.addAttribute("userNameIs", user.getName());
         }

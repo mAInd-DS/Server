@@ -2,10 +2,7 @@ package com.mAInd.springboot.service.surveys;
 
 import com.mAInd.springboot.domain.surveys.Surveys;
 import com.mAInd.springboot.domain.surveys.SurveysRepository;
-import com.mAInd.springboot.web.dto.ProfilesListResponseDto;
-import com.mAInd.springboot.web.dto.SurveysResponseDto;
-import com.mAInd.springboot.web.dto.SurveysSaveRequestDto;
-import com.mAInd.springboot.web.dto.SurveysUpdateRequestDto;
+import com.mAInd.springboot.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,6 +49,13 @@ public class SurveysService {
                 .orElseThrow(()-> new
                         IllegalArgumentException("해당 설문지가 없습니다. survey_id=" + survey_id));
         return new SurveysResponseDto(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<SurveysListResponseDto> findAllDesc(){
+        return surveysRepository.findAllDesc().stream()
+                .map(SurveysListResponseDto::new)
+                .collect(Collectors.toList());
     }
 
 }
