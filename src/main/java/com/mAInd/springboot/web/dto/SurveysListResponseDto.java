@@ -4,6 +4,7 @@ import com.mAInd.springboot.domain.surveys.Gender;
 import com.mAInd.springboot.domain.surveys.Surveys;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class SurveysListResponseDto {
@@ -26,7 +27,7 @@ public class SurveysListResponseDto {
     private String q_10;
     private String q_11;
     private Long client_id;
-    private LocalDate modifiedDate;
+    private LocalDateTime modifiedDate;
 
     public SurveysListResponseDto(Surveys entity){
         this.survey_id = entity.getSurvey_id();
