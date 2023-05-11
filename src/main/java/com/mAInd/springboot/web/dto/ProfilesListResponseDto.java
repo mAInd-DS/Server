@@ -13,7 +13,7 @@ public class ProfilesListResponseDto {
     private String career;
     private String education;
     private String content;
-    private LocalDate modifiedDate;
+    private LocalDateTime modifiedDate;
 
     public ProfilesListResponseDto(Profiles entity){
         this.profile_id = entity.getProfile_id();
