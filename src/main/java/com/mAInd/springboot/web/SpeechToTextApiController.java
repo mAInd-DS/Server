@@ -5,17 +5,19 @@ import com.google.api.gax.longrunning.OperationTimedPollAlgorithm;
 import com.google.api.gax.retrying.RetrySettings;
 import com.google.api.gax.retrying.TimedRetryAlgorithm;
 import com.google.cloud.speech.v1.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import org.threeten.bp.Duration;
 
+@RequiredArgsConstructor
 @RestController
 public class SpeechToTextApiController {
+
+    private final AwsS3Service awsS3Service;
+
     @GetMapping("/speech")
     public String speech() throws IOException {
         try (SpeechClient speechClient = SpeechClient.create()) {
@@ -37,47 +39,23 @@ public class SpeechToTextApiController {
             List<SpeechRecognitionResult> results = response.getResultsList();
 
             for (SpeechRecognitionResult result : results) {
-                // There can be several alternative transcripts for a given chunk of speech. Just use the
-                // first (most likely) one here.
+                // There can be several alternative transcripts for a given chunk of speech.
+                // Just use the first (most likely) one here.
                 SpeechRecognitionAlternative alternative = result.getAlternativesList().get(0);
                 System.out.printf("Transcription: %s%n", alternative.getTranscript());
 
+                //speech-to-text 결과를 S3 bucket에 저장
+                String fileName = "text.txt";
+                String transcript = alternative.getTranscript();
+                byte [] strBytes = transcript.getBytes();
+                awsS3Service.uploadObject(strBytes, fileName);
 
-                //파일로 저장해보기
-                String str = alternative.getTranscript();
-                String filePath = "C:\\DS-mAInd\\mAInd-webservice\\src\\main\\resources\\test.txt";
-                try{
-                    FileWriter fileWriter = new FileWriter(filePath);
-                    fileWriter.write(str);
-                    fileWriter.close();
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
-
-
-                return alternative.getTranscript();
+                return transcript;
             }
         }
         return "error message";
     }
 
-//    public void string_to_file() throws IOException{
-//        String str = speech();
-//        String filePath = "gs://ds-maind-bucket/speech-to-text.text";
-//        try{
-//            FileWriter fileWriter = new FileWriter(filePath);
-//            fileWriter.write(str);
-//            fileWriter.close();
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        }
-//    }
-
-    /**
-     * Performs non-blocking speech recognition on remote FLAC file and prints the transcription.
-     *
-     * @param gcsUri the path to the remote LINEAR16 audio file to transcribe.
-     */
     @GetMapping("/speech/long")
     public String speechLong() throws Exception {
         String gcsUri = "gs://ds-maind-bucket/class_voice.wav";
@@ -126,8 +104,8 @@ public class SpeechToTextApiController {
             List<SpeechRecognitionResult> results = response.get().getResultsList();
 
             for (SpeechRecognitionResult result : results) {
-                // There can be several alternative transcripts for a given chunk of speech. Just use the
-                // first (most likely) one here.
+                // There can be several alternative transcripts for a given chunk of speech.
+                // Just use the first (most likely) one here.
                 SpeechRecognitionAlternative alternative = result.getAlternativesList().get(0);
                 transcription.append(alternative.getTranscript());
                 System.out.printf("Transcription: %s\n", alternative.getTranscript());
