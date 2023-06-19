@@ -1,5 +1,7 @@
 package com.mAInd.springboot.web;
-
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.transcribe.AmazonTranscribeClient;
+import com.amazonaws.services.transcribe.model.*;
 import com.google.api.gax.longrunning.OperationFuture;
 import com.google.api.gax.longrunning.OperationTimedPollAlgorithm;
 import com.google.api.gax.retrying.RetrySettings;
@@ -8,16 +10,84 @@ import com.google.cloud.speech.v1.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.io.IOException;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import org.threeten.bp.Duration;
+
+
 
 @RequiredArgsConstructor
 @RestController
 public class SpeechToTextApiController {
 
     private final AwsS3Service awsS3Service;
+    private final AmazonTranscribeClient transcribeClient;
+    private final AmazonS3 s3Client;
 
+
+    @GetMapping("/transcribe")
+    public String transcribe() throws IOException {
+        //S3 버킷에서 음성파일 가져오기
+        String bucketName = "maind-bucket";
+        String objectKey = "voice.wav";
+        String jobName = "transcribe-job-" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+
+        //Media 객체 생성하여 S3 버킷에서 가져온 음성 파일 URI 설정
+        Media media = new Media().withMediaFileUri("s3://" + bucketName + "/" + objectKey);
+
+        //Transcription 작업을 시작하기 위한 요청 생성
+        StartTranscriptionJobRequest request = new StartTranscriptionJobRequest()
+                .withTranscriptionJobName(jobName)
+                .withLanguageCode(LanguageCode.KoKR)
+                .withMedia(media)
+                .withOutputBucketName(bucketName);
+
+        //Transcription 작업 시작 요청 보내고 결과 받기
+        StartTranscriptionJobResult result = transcribeClient.startTranscriptionJob(request);
+
+        //Transcription 작업이 완료될 때까지 대기
+        while (true) {
+            GetTranscriptionJobRequest getTranscriptionJobRequest = new GetTranscriptionJobRequest()
+                    .withTranscriptionJobName(jobName);
+            GetTranscriptionJobResult getTranscriptionJobResult = transcribeClient.getTranscriptionJob(getTranscriptionJobRequest);
+            String status = getTranscriptionJobResult.getTranscriptionJob().getTranscriptionJobStatus();
+
+            if (status.equals(TranscriptionJobStatus.COMPLETED.toString())) {
+                /*
+                String transcriptFileUri = getTranscriptionJobResult.getTranscriptionJob().getTranscript().getTranscriptFileUri();
+
+                // S3에서 JSON 파일 읽기
+                InputStream inputStream = s3Client.getObject(bucketName, transcriptFileUri).getObjectContent();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                StringBuilder jsonContent = new StringBuilder();
+                String line;
+
+                // 한 줄씩 읽어와 StringBuilder에 추가
+                while ((line = reader.readLine()) != null) {
+                    jsonContent.append(line).append('\n');
+                }
+
+                // JSON 내용 출력
+                System.out.println("JSON Content:\n" + jsonContent.toString());
+                reader.close();
+                inputStream.close();
+
+                break;
+                */
+                return "Transcription completed.";
+            }
+        }
+
+    }
+
+
+    /*
     @GetMapping("/speech")
     public String speech() throws IOException {
         try (SpeechClient speechClient = SpeechClient.create()) {
@@ -113,4 +183,6 @@ public class SpeechToTextApiController {
             return transcription.toString();
         }
     }
+    */
+
 }
