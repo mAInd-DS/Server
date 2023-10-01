@@ -29,8 +29,6 @@ public class Users extends BaseTimeEntity {
     @Column(nullable = false)
     private Role role;
 
-//    private String refreshToken;
-
 //    @OneToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name="profile_id", referencedColumnName = "profile_id")
 //    private Profiles profile_id;
