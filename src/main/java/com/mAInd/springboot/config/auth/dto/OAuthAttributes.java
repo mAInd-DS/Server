@@ -1,6 +1,7 @@
 package com.mAInd.springboot.config.auth.dto;
 
 import com.mAInd.springboot.domain.user.Role;
+import com.mAInd.springboot.domain.user.UserStatus;
 import com.mAInd.springboot.domain.user.Users;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +11,7 @@ import java.util.Map;
 @Getter
 public class OAuthAttributes {
     private Map<String, Object> attributes;
-    private String nameAttributeKey;
+    private String nameAttributeKey; // OAuth2 로그인 진행 시 키가 되는 필드 값, PK와 같은 의미
     private String name;
     private String email;
     private String picture;
@@ -52,6 +53,7 @@ public class OAuthAttributes {
                 .email(email)
                 .picture(picture)
                 .role(Role.CLIENT)
+                .userStatus(UserStatus.BEFORE_SURVEY)
                 .build();
     }
 }

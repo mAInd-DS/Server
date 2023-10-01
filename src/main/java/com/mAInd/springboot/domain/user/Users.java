@@ -2,9 +2,11 @@ package com.mAInd.springboot.domain.user;
 
 import com.mAInd.springboot.domain.BaseTimeEntity;
 import com.mAInd.springboot.domain.profiles.Profiles;
+import com.mAInd.springboot.domain.surveys.Gender;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -29,16 +31,23 @@ public class Users extends BaseTimeEntity {
     @Column(nullable = false)
     private Role role;
 
+    @Enumerated(EnumType.STRING)
+    @Column
+//    @ColumnDefault("BEFORE_SURVEY")
+    private UserStatus userStatus;
+
+
 //    @OneToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name="profile_id", referencedColumnName = "profile_id")
 //    private Profiles profile_id;
 
     @Builder
-    public Users(String name, String email, String picture, Role role){
+    public Users(String name, String email, String picture, Role role, UserStatus userStatus){
         this.name = name;
         this.email = email;
         this.picture = picture;
         this.role = role;
+        this.userStatus = userStatus;
     }
 
     public Users update(String name, String picture){
@@ -51,4 +60,5 @@ public class Users extends BaseTimeEntity {
     public String getRoleKey(){
         return this.role.getKey();
     }
+    public String getUserStatusKey() {return this.userStatus.getKey();}
 }
