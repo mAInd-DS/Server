@@ -7,6 +7,7 @@ import com.mAInd.springboot.service.surveys.SurveysService;
 import com.mAInd.springboot.web.dto.ProfilesResponseDto;
 import com.mAInd.springboot.web.dto.SurveysResponseDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Controller
+@Slf4j
 public class IndexController {
     private final ProfilesService profilesService;
 //    private final SurveysService surveysService;
@@ -68,4 +70,12 @@ public class IndexController {
 //    }
 
 
+    @GetMapping("/log")
+    public void log(){
+        log.trace("trace message");
+        log.debug("debug message");
+        log.info("info message"); // default
+        log.warn("warn message");
+        log.error("error message");
+    }
 }

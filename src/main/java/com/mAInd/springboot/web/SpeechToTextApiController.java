@@ -1,4 +1,5 @@
 package com.mAInd.springboot.web;
+import com.amazonaws.protocol.json.JsonContent;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.transcribe.AmazonTranscribeClient;
 import com.amazonaws.services.transcribe.model.*;
@@ -8,7 +9,10 @@ import com.google.api.gax.retrying.RetrySettings;
 import com.google.api.gax.retrying.TimedRetryAlgorithm;
 import com.google.cloud.speech.v1.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.*;
@@ -28,7 +32,6 @@ public class SpeechToTextApiController {
     private final AwsS3Service awsS3Service;
     private final AmazonTranscribeClient transcribeClient;
     private final AmazonS3 s3Client;
-
 
     @GetMapping("/transcribe")
     public String transcribe() throws IOException {

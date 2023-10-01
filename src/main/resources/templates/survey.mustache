@@ -1,18 +1,20 @@
 {{>layout/header}}
 
-<h1>mAInd 홈페이지</h1>
+<h3>마이페이지</h3>
 <div class="col-md-12">
-    <!--로그인 기능 영역-->
+    {{>layout/nav}}
     <div class="row">
         <div class="col-md-6">
-            <a href="/mypage/surveys/save" role="button" class="btn btn-primary">초기 설문지 작성</a>
-            {{#userNameIs}}
-                Logged in as: <span id="user">{{userNameIs}}</span>
-                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
-            {{/userNameIs}}
-            {{^userNameIs}}
-                <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
-            {{/userNameIs}}
+            <br>
+            <a href="/mypage/surveys/save" role="button" class="btn btn-primary" style="float: right; margin-left: 10px;">초기 설문지 작성</a>
+            <a href="#" role="button" class="btn btn-primary" style="float: right; margin-left: 10px;">상담자 자격증 등록</a>
+<!--            {{#userNameIs}}-->
+<!--                Logged in as: <span id="user">{{userNameIs}}</span>-->
+<!--                <a href="/logout" class="btn btn-info active" role="button">Logout</a>-->
+<!--            {{/userNameIs}}-->
+<!--            {{^userNameIs}}-->
+<!--                <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>-->
+<!--            {{/userNameIs}}-->
         </div>
     </div>
     <br>
@@ -20,16 +22,16 @@
     <table class="table table-horizontal table-bordered">
         <thead class="thead-strong">
         <tr>
-            <th>초기 설문지 id</th>
-            <th>작성자</th>
-            <th>최종수정일</th>
+            <th>초기 설문지 번호</th>
+            <th>초기 설문지</th>
+            <th>최종 수정일</th>
         </tr>
         </thead>
         <tbody id="tbody">
         {{#surveys}}
             <tr>
                 <td>{{survey_id}}</td>
-                <td><a href="/mypage/surveys/update/{{surveys_id}}">{{name}}</a></td>
+                <td><a href="/mypage/surveys/update/{{survey_id}}">{{name}}</a></td>
                 <td>{{modifiedDate}}</td>
             </tr>
         {{/surveys}}
