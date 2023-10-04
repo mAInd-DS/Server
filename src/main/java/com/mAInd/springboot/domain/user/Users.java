@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
@@ -27,6 +28,10 @@ public class Users extends BaseTimeEntity {
     @Column
     private String picture;
 
+    private String password;
+
+    private String refreshToken; // 리프레시 토큰
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
@@ -35,6 +40,7 @@ public class Users extends BaseTimeEntity {
     @Column
 //    @ColumnDefault("BEFORE_SURVEY")
     private UserStatus userStatus;
+
 
 
 //    @OneToOne(fetch = FetchType.LAZY)
@@ -57,8 +63,29 @@ public class Users extends BaseTimeEntity {
         return this;
     }
 
+    // 내담자 권한 설정 메소드
+    public void authorizeClient(){
+        this.role = Role.CLIENT;
+    }
+
+    // 상담자 권한 설정 메소드
+    public void authorizeCounselor(){
+        this.role = Role.COUNSELOR;
+    }
+
     public String getRoleKey(){
         return this.role.getKey();
     }
     public String getUserStatusKey() {return this.userStatus.getKey();}
+
+    public void updateRefreshToken(String updateRefreshToken) {
+        this.refreshToken = updateRefreshToken;
+    }
+
+    //비밀번호 암호화 메소드
+    public void passwordEncode(PasswordEncoder passwordEncoder){
+        this.password = passwordEncoder.encode(this.password);
+    }
+
+
 }

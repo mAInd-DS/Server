@@ -1,5 +1,6 @@
 package com.mAInd.springboot.config.auth;
 
+import com.mAInd.springboot.domain.user.Role;
 import com.mAInd.springboot.domain.user.UserStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
@@ -9,12 +10,24 @@ import java.util.Map;
 
 public class CustomOAuth2User extends DefaultOAuth2User {
 
+    private String email;
     private UserStatus userStatus;
+    private Role role;
 
     public CustomOAuth2User(Collection<? extends GrantedAuthority> authorities,
-                            Map<String, Object> attributes, String nameAttributeKey, UserStatus userStatus){
+                            Map<String, Object> attributes, String nameAttributeKey, String email, UserStatus userStatus, Role role){
         super(authorities, attributes, nameAttributeKey);
+        this.email = email;
         this.userStatus = userStatus;
-
+        this.role = role;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
 }

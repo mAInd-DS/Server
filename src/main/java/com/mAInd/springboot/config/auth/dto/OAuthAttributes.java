@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.util.Map;
+import java.util.UUID;
 
 @Getter
 public class OAuthAttributes {
@@ -45,14 +46,14 @@ public class OAuthAttributes {
 
     //toEntity(): User 엔티티 생성
     //OAuthAttributes에서 엔티티를 생성하는 시점은 처음 가입할 때
-    //가입할 때의 기본 권한을 CLIENT로 줌
+    //가입할 때의 기본 권한을 GUEST로 줌
     //OAuthAttributes 클래스 생성이 끝나면 같은 패키지에 SessionUser 클래스를 생성함
     public Users toEntity() {
         return Users.builder()
                 .name(name)
-                .email(email)
+                .email(UUID.randomUUID() + "@socialUser.com")
                 .picture(picture)
-                .role(Role.CLIENT)
+                .role(Role.GUEST)
                 .userStatus(UserStatus.BEFORE_SURVEY)
                 .build();
     }

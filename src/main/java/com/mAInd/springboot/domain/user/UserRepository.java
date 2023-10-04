@@ -12,5 +12,6 @@ public interface UserRepository extends JpaRepository<Users, Long> {
 
     //email을 통해 이미 생성된 사용자인지 처음 가입하는 사용자인지 판단
     Optional<Users> findByEmail(String email);
+    Optional<Users> findByRefreshToken(String refreshToken);
 
 }
