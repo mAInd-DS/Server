@@ -20,17 +20,19 @@ public class Users extends BaseTimeEntity {
     private Long user_id;
 
     @Column(nullable = false)
-    private String name;
+    private String name; //이름
 
     @Column(nullable = false)
-    private String email;
+    private String email; //이메일
 
     @Column
-    private String picture;
+    private String picture; //프로필 이미지
 
-    private String password;
+    private String password; //비밀번호
 
-    private String refreshToken; // 리프레시 토큰
+    private String refreshToken; //리프레시 토큰
+
+    private String socialId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -38,22 +40,17 @@ public class Users extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     @Column
-//    @ColumnDefault("BEFORE_SURVEY")
     private UserStatus userStatus;
 
-
-
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name="profile_id", referencedColumnName = "profile_id")
-//    private Profiles profile_id;
-
     @Builder
-    public Users(String name, String email, String picture, Role role, UserStatus userStatus){
+    public Users(String name, String email, String picture, String password, Role role, UserStatus userStatus, String socialId){
         this.name = name;
         this.email = email;
         this.picture = picture;
         this.role = role;
+        this.password = password;
         this.userStatus = userStatus;
+        this.socialId = socialId;
     }
 
     public Users update(String name, String picture){
@@ -62,6 +59,7 @@ public class Users extends BaseTimeEntity {
 
         return this;
     }
+
 
     // 내담자 권한 설정 메소드
     public void authorizeClient(){
@@ -76,7 +74,6 @@ public class Users extends BaseTimeEntity {
     public String getRoleKey(){
         return this.role.getKey();
     }
-    public String getUserStatusKey() {return this.userStatus.getKey();}
 
     public void updateRefreshToken(String updateRefreshToken) {
         this.refreshToken = updateRefreshToken;

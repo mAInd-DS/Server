@@ -2,12 +2,13 @@ package com.mAInd.springboot.config.auth;
 
 import com.mAInd.springboot.domain.user.Role;
 import com.mAInd.springboot.domain.user.UserStatus;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 
 import java.util.Collection;
 import java.util.Map;
-
+@Getter
 public class CustomOAuth2User extends DefaultOAuth2User {
 
     private String email;
@@ -15,19 +16,11 @@ public class CustomOAuth2User extends DefaultOAuth2User {
     private Role role;
 
     public CustomOAuth2User(Collection<? extends GrantedAuthority> authorities,
-                            Map<String, Object> attributes, String nameAttributeKey, String email, UserStatus userStatus, Role role){
+                            Map<String, Object> attributes, String nameAttributeKey, String email, Role role, UserStatus userStatus){
         super(authorities, attributes, nameAttributeKey);
         this.email = email;
-        this.userStatus = userStatus;
         this.role = role;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public String getEmail(){
-        return email;
+        this.userStatus = userStatus;
     }
 
 }

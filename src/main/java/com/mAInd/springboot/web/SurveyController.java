@@ -1,7 +1,5 @@
 package com.mAInd.springboot.web;
 
-import com.mAInd.springboot.config.auth.LoginUser;
-import com.mAInd.springboot.config.auth.dto.SessionUser;
 import com.mAInd.springboot.service.profiles.ProfilesService;
 import com.mAInd.springboot.service.surveys.SurveysService;
 import com.mAInd.springboot.web.dto.ProfilesResponseDto;
@@ -19,14 +17,14 @@ import javax.servlet.http.HttpSession;
 public class SurveyController {
     private final SurveysService surveysService;
 
-    @GetMapping("/mypage")
-    public String mypage(Model model, @LoginUser SessionUser user){
-        model.addAttribute("surveys", surveysService.findAllDesc());
-        if(user != null){
-            model.addAttribute("userNameIs", user.getName());
-        }
-        return "survey";
-    }
+//    @GetMapping("/mypage")
+//    public String mypage(Model model, @LoginUser SessionUser user){
+//        model.addAttribute("surveys", surveysService.findAllDesc());
+//        if(user != null){
+//            model.addAttribute("userNameIs", user.getName());
+//        }
+//        return "survey";
+//    }
 
     @GetMapping("/mypage/surveys/save")
     public String surveysSave(){

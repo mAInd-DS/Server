@@ -3,6 +3,7 @@ package com.mAInd.springboot.config.auth;
 import com.mAInd.springboot.Jwt.JwtService;
 import com.mAInd.springboot.domain.user.Role;
 import com.mAInd.springboot.domain.user.UserRepository;
+import com.mAInd.springboot.domain.user.Users;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -32,9 +33,13 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
             if (oAuth2User.getRole() == Role.GUEST) {
                 String accessToken = jwtService.createAccessToken(oAuth2User.getEmail());
                 response.addHeader(jwtService.getAccessHeader(), "Bearer " + accessToken);
-                response.sendRedirect("oauth2/sign-up"); //프론트의 회원 추가 정보입력 폼으로
+//                response.sendRedirect("oauth2/sign-up"); //프론트의 회원 추가 정보입력 폼으로
 
+                Users findUser = userRepository.findByEmail(oAuth2User.getEmail())
+                                .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+                findUser.authorizeCounselor();
                 jwtService.sendAccessAndRefreshToken(response, accessToken, null);
+
             } else {
                 loginSuccess(response, oAuth2User); //로그인에 성공한 경우 access, refresh
             }
