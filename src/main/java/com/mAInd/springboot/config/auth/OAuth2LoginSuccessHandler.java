@@ -39,7 +39,6 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
                                 .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
                 findUser.authorizeCounselor();
                 jwtService.sendAccessAndRefreshToken(response, accessToken, null);
-
             } else {
                 loginSuccess(response, oAuth2User); //로그인에 성공한 경우 access, refresh
             }
