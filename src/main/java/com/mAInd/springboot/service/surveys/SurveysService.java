@@ -26,8 +26,8 @@ public class SurveysService {
         Surveys surveys = surveysRepository.findById(survey_id)
                 .orElseThrow(() -> new
                         IllegalArgumentException("해당 설문지가 없습니다. survey_id="+survey_id));
-        surveys.update(requestDto.getName(),requestDto.getGender(), requestDto.getEmail(),
-                requestDto.getBirth(), requestDto.getPhone(), requestDto.getEducation(),
+        surveys.update(requestDto.getName(), requestDto.getGender(), requestDto.getEmail(),
+                requestDto.getBirth(), requestDto.getPhone(), requestDto.getEducation(), requestDto.getSymptoms(),
                 requestDto.getQ_1(), requestDto.getQ_2(), requestDto.getQ_3(),
                 requestDto.getQ_4(), requestDto.getQ_5(), requestDto.getQ_6(),
                 requestDto.getQ_7(), requestDto.getQ_8(), requestDto.getQ_9(),

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -16,6 +17,7 @@ public class SurveysUpdateRequestDto {
     private Date birth;
     private String phone;
     private String education;
+    private List<String> symptoms;
     private String q_1;
     private String q_2;
     private String q_3;
@@ -30,7 +32,7 @@ public class SurveysUpdateRequestDto {
 
     @Builder
     public SurveysUpdateRequestDto(String name, Gender gender, String email, Date birth,
-                                     String phone, String education, String q_1, String q_2,
+                                     String phone, String education, List<String> symptoms, String q_1, String q_2,
                                      String q_3, String q_4, String q_5, String q_6, String q_7,
                                      String q_8, String q_9, String q_10, String q_11){
         this.name = name;
@@ -39,6 +41,7 @@ public class SurveysUpdateRequestDto {
         this.birth = birth;
         this.phone = phone;
         this.education = education;
+        this.symptoms = symptoms;
         this.q_1 = q_1;
         this.q_2 = q_2;
         this.q_3 = q_3;
