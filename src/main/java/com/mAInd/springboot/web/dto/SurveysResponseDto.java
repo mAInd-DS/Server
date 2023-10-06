@@ -16,7 +16,6 @@ public class SurveysResponseDto {
     private Date birth;
     private String phone;
     private String education;
-
     private List<String> symptoms;
     private String q_1;
     private String q_2;
@@ -30,8 +29,9 @@ public class SurveysResponseDto {
     private String q_10;
     private String q_11;
     private Long client_id;
+    private Long counselor_id;
 
-    private String test;
+
     public SurveysResponseDto(Surveys entity){
         this.survey_id = entity.getSurvey_id();
         this.name = entity.getName();
@@ -53,5 +53,6 @@ public class SurveysResponseDto {
         this.q_10 = entity.getQ_10();
         this.q_11 = entity.getQ_11();
         this.client_id = entity.getClient_id();
+        this.counselor_id = entity.getCounselor_id();
     }
 }

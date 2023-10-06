@@ -28,6 +28,7 @@ public class SurveysListResponseDto {
     private String q_10;
     private String q_11;
     private Long client_id;
+    private Long counselor_id;
 
     private List<String> symptoms;
     private LocalDateTime modifiedDate;
@@ -53,6 +54,7 @@ public class SurveysListResponseDto {
         this.q_10 = entity.getQ_10();
         this.q_11 = entity.getQ_11();
         this.client_id = entity.getClient_id();
+        this.counselor_id = entity.getCounselor_id();
         this.modifiedDate = entity.getModifiedDate();
     }
 }
