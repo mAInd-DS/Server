@@ -2,13 +2,17 @@ package com.mAInd.springboot.domain.surveys;
 
 import com.mAInd.springboot.domain.BaseTimeEntity;
 import com.mAInd.springboot.domain.surveys.Gender;
+import com.mAInd.springboot.domain.user.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
+import static javax.persistence.FetchType.LAZY;
 
 @Getter
 @NoArgsConstructor
@@ -55,8 +59,13 @@ public class Surveys extends BaseTimeEntity {
     private String q_10;
     private String q_11;
 
-    @Column(nullable = true)
-    private Long client_id;
+//    @Column(nullable = true)
+//    private Long client_id;
+
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "client_id", nullable = true)
+    @JsonIgnore
+    private Users client_id;
 
     @Column(nullable = true)
     private Long counselor_id;
@@ -66,7 +75,7 @@ public class Surveys extends BaseTimeEntity {
     public Surveys(String name, Gender gender, String email, Date birth,
                    String phone, String education, List<String> symptoms,
                    String q_1, String q_2,  String q_3, String q_4, String q_5, String q_6,
-                   String q_7, String q_8, String q_9, String q_10, String q_11, Long client_id, Long counselor_id) {
+                   String q_7, String q_8, String q_9, String q_10, String q_11, Users client_id, Long counselor_id) {
         this.name = name;
         this.gender = gender;
         this.email = email;

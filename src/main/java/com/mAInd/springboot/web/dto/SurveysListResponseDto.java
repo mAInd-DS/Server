@@ -2,6 +2,7 @@ package com.mAInd.springboot.web.dto;
 
 import com.mAInd.springboot.domain.surveys.Gender;
 import com.mAInd.springboot.domain.surveys.Surveys;
+import com.mAInd.springboot.domain.user.Users;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,8 +28,8 @@ public class SurveysListResponseDto {
     private String q_9;
     private String q_10;
     private String q_11;
-    private Long client_id;
-    private Long counselor_id;
+//    private Users client_id;
+//    private Long counselor_id;
 
     private List<String> symptoms;
     private LocalDateTime modifiedDate;
@@ -53,8 +54,8 @@ public class SurveysListResponseDto {
         this.q_9 = entity.getQ_9();
         this.q_10 = entity.getQ_10();
         this.q_11 = entity.getQ_11();
-        this.client_id = entity.getClient_id();
-        this.counselor_id = entity.getCounselor_id();
+//        this.client_id = entity.getClient_id();
+//        this.counselor_id = entity.getCounselor_id();
         this.modifiedDate = entity.getModifiedDate();
     }
 }
