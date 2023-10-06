@@ -13,21 +13,21 @@ import java.util.List;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     private final long MAX_AGE_SECS = 3600;
-//
+
 //    @Override
 //    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers){
 //        argumentResolvers.add(loginUserArgumentResolver);
 //    }
 
     @Override
-    public void addCorsMappings(CorsRegistry registry) {
+    public void addCorsMappings(CorsRegistry registry){
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:4443")
-                .allowedOrigins("http://localhost:3000")
-                .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
-                .allowedHeaders("*")
-                .allowCredentials(true)
-                .maxAge(MAX_AGE_SECS);
+                .allowedOrigins("http://localhost:8080", "http://maind.site:8080",
+                        "http://localhost:3000",
+                        "https://localhost:3000",
+                        "https://127.0.0.1:3000"
+                )
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+        ;
     }
-
 }
