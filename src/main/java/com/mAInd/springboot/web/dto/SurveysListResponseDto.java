@@ -27,6 +27,8 @@ public class SurveysListResponseDto {
     private String q_10;
     private String q_11;
     private Long client_id;
+
+    private String test;
     private LocalDateTime modifiedDate;
 
     public SurveysListResponseDto(Surveys entity){

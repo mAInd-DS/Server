@@ -53,6 +53,7 @@ public class Surveys extends BaseTimeEntity {
     @Column(nullable = true)
     private Long client_id;
 
+
     @Builder
     public Surveys(String name, Gender gender, String email, Date birth,
                    String phone, String education, String q_1, String q_2,

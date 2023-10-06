@@ -28,6 +28,7 @@ public class SurveysResponseDto {
     private String q_11;
     private Long client_id;
 
+    private String test;
     public SurveysResponseDto(Surveys entity){
         this.survey_id = entity.getSurvey_id();
         this.name = entity.getName();
