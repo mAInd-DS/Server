@@ -6,6 +6,7 @@ import com.mAInd.springboot.domain.surveys.Surveys;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 public class SurveysListResponseDto {
     private Long survey_id;
@@ -28,7 +29,7 @@ public class SurveysListResponseDto {
     private String q_11;
     private Long client_id;
 
-    private String test;
+    private List<String> symptoms;
     private LocalDateTime modifiedDate;
 
     public SurveysListResponseDto(Surveys entity){
@@ -39,6 +40,7 @@ public class SurveysListResponseDto {
         this.birth = entity.getBirth();
         this.phone = entity.getPhone();
         this.education = entity.getEducation();
+        this.symptoms = entity.getSymptoms();
         this.q_1 = entity.getQ_1();
         this.q_2 = entity.getQ_2();
         this.q_3 = entity.getQ_3();

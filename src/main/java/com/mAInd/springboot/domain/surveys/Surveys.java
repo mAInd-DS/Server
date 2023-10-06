@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -37,6 +38,10 @@ public class Surveys extends BaseTimeEntity {
     @Column(length = 100, nullable = false)
     private String education;
 
+    @ElementCollection
+    @Column
+    private List<String> symptoms;
+
     @Column(length = 1000, nullable = false)
     private String q_1;
     private String q_2;
@@ -56,15 +61,16 @@ public class Surveys extends BaseTimeEntity {
 
     @Builder
     public Surveys(String name, Gender gender, String email, Date birth,
-                   String phone, String education, String q_1, String q_2,
-                   String q_3, String q_4, String q_5, String q_6, String q_7,
-                   String q_8, String q_9, String q_10, String q_11, Long client_id) {
+                   String phone, String education, List<String> symptoms,
+                   String q_1, String q_2,  String q_3, String q_4, String q_5, String q_6,
+                   String q_7, String q_8, String q_9, String q_10, String q_11, Long client_id) {
         this.name = name;
         this.gender = gender;
         this.email = email;
         this.birth = birth;
         this.phone = phone;
         this.education = education;
+        this.symptoms = symptoms;
         this.q_1 = q_1;
         this.q_2 = q_2;
         this.q_3 = q_3;
@@ -80,7 +86,7 @@ public class Surveys extends BaseTimeEntity {
     }
 
     public void update(String name, Gender gender, String email, Date birth,
-                       String phone, String education, String q_1, String q_2,
+                       String phone, String education, List<String> symptoms, String q_1, String q_2,
                        String q_3, String q_4, String q_5, String q_6, String q_7,
                        String q_8, String q_9, String q_10, String q_11){
         this.name = name;
