@@ -1,5 +1,6 @@
 package com.mAInd.springboot.web.dto;
 
+import com.mAInd.springboot.domain.surveys.ApplyStatus;
 import com.mAInd.springboot.domain.surveys.Gender;
 import com.mAInd.springboot.domain.surveys.Surveys;
 import com.mAInd.springboot.domain.user.Users;
@@ -32,6 +33,8 @@ public class SurveysResponseDto {
 //    private Users client_id;
 //    private Long counselor_id;
 
+    private ApplyStatus applyStatus;
+
 
     public SurveysResponseDto(Surveys entity){
         this.survey_id = entity.getSurvey_id();
@@ -55,5 +58,6 @@ public class SurveysResponseDto {
         this.q_11 = entity.getQ_11();
 //        this.client_id = entity.getClient_id();
 //        this.counselor_id = entity.getCounselor_id();
+        this.applyStatus = entity.getApplyStatus();
     }
 }

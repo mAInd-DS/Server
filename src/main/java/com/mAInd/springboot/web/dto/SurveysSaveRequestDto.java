@@ -1,5 +1,6 @@
 package com.mAInd.springboot.web.dto;
 
+import com.mAInd.springboot.domain.surveys.ApplyStatus;
 import com.mAInd.springboot.domain.surveys.Gender;
 import com.mAInd.springboot.domain.surveys.Surveys;
 import lombok.Builder;
@@ -31,6 +32,7 @@ public class SurveysSaveRequestDto {
     private String q_9;
     private String q_10;
     private String q_11;
+
 
     @Builder
     public SurveysSaveRequestDto(String name, Gender gender, String email, Date birth,
@@ -78,6 +80,7 @@ public class SurveysSaveRequestDto {
                 .q_9(q_9)
                 .q_10(q_10)
                 .q_11(q_11)
+                .applyStatus(ApplyStatus.BEFORE)
                 .build();
     }
 }

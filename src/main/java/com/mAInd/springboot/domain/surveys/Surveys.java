@@ -7,8 +7,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import net.minidev.json.annotate.JsonIgnore;
+import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -70,12 +72,20 @@ public class Surveys extends BaseTimeEntity {
     @Column(nullable = true)
     private Long counselor_id;
 
+    @Enumerated(EnumType.STRING)
+    @Column
+    private ApplyStatus applyStatus;
+
+    @Column
+    private LocalDateTime statusDate;
+
 
     @Builder
     public Surveys(String name, Gender gender, String email, Date birth,
                    String phone, String education, List<String> symptoms,
-                   String q_1, String q_2,  String q_3, String q_4, String q_5, String q_6,
-                   String q_7, String q_8, String q_9, String q_10, String q_11, Users client_id, Long counselor_id) {
+                   String q_1, String q_2, String q_3, String q_4, String q_5, String q_6,
+                   String q_7, String q_8, String q_9, String q_10, String q_11, Users client_id, Long counselor_id,
+                   ApplyStatus applyStatus, LocalDateTime statusDate) {
         this.name = name;
         this.gender = gender;
         this.email = email;
@@ -96,6 +106,8 @@ public class Surveys extends BaseTimeEntity {
         this.q_11 = q_11;
         this.client_id = client_id;
         this.counselor_id = counselor_id;
+        this.applyStatus = applyStatus;
+        this.statusDate = statusDate;
     }
 
     public void update(String name, Gender gender, String email, Date birth,
