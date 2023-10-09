@@ -3,9 +3,7 @@ package com.mAInd.springboot.domain.user;
 import com.mAInd.springboot.domain.BaseTimeEntity;
 import com.mAInd.springboot.domain.profiles.Profiles;
 import com.mAInd.springboot.domain.surveys.Gender;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -14,6 +12,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
+@AllArgsConstructor
 public class Users extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,10 +1,15 @@
 package com.mAInd.springboot.domain.user;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,4 +28,20 @@ public class UserController {
     public String jwtTest() {
         return "jwtTest 요청 성공";
     }
+
+    @GetMapping("/header-test")
+    @ResponseBody
+    public String currentUserInfo(Principal principal) {
+        return principal.getName();
+    }
+
+    @GetMapping("/header-test2")
+    @ResponseBody
+    public String currentUserName(Authentication authentication){
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        return userDetails.getUsername();
+    }
+
+
 }

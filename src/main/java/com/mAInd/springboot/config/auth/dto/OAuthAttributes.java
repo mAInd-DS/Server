@@ -34,14 +34,16 @@ public class OAuthAttributes {
                 .build();
     }
 
-    //toEntity(): User 엔티티 생성
-    //OAuthAttributes에서 엔티티를 생성하는 시점은 처음 가입할 때
-    //가입할 때의 기본 권한을 GUEST로 줌
-    //OAuthAttributes 클래스 생성이 끝나면 같은 패키지에 SessionUser 클래스를 생성함
+    /**
+     * of메소드로 OAuthAttributes 객체가 생성되어, 유저 정보들이 담긴 OAuth2UserInfo가 소셜 타입별로 주입된 상태
+     * OAuth2UserInfo에서 socialId(식별값), nickname, imageUrl을 가져와서 build
+     * role은 GUEST로 설정
+     */
     public Users toEntity(OAuth2UserInfo oauth2UserInfo) {
         return Users.builder()
+                .socialId(oauth2UserInfo.getId())
                 .name(oauth2UserInfo.getName())
-                .email(UUID.randomUUID() + "@socialUser.com")
+                .email(oauth2UserInfo.getEmail())
                 .picture(oauth2UserInfo.getImageUrl())
                 .role(Role.GUEST)
                 .userStatus(UserStatus.BEFORE_SURVEY)

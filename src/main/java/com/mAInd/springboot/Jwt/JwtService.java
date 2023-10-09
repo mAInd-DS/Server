@@ -58,7 +58,7 @@ public class JwtService {
                 //추가적으로 식별자나, 이름 등의 정보를 더 추가해도 됨
                 //추가할 경우 .withClaim(클래임 이름, 클래임 값) 으로 설정
                 .withClaim(EMAIL_CLAIM, email)
-                .sign(Algorithm.HMAC512(secretKey)); // HMAC512 알고리즘 사용, application-jwt.yml에서 지정한 secret 키로 암호화
+                .sign(Algorithm.HMAC512(secretKey)); // HMAC512 알고리즘 사용, application.properties에서 지정한 secret 키로 암호화
     }
 
     /**
@@ -74,7 +74,7 @@ public class JwtService {
     }
 
     /**
-     * AccessToken 헤더에 실어서 보내기
+     *  AccessToken 재발급 시 AccessToken을 헤더에 실어서 보내는 메소드
      */
     public void sendAccessToken(HttpServletResponse response, String accessToken) {
         response.setStatus(HttpServletResponse.SC_OK);
@@ -84,7 +84,7 @@ public class JwtService {
     }
 
     /**
-     * AccessToken + RefreshToken 헤더에 실어서 보내기
+     * 로그인 시 AccessToken & RefreshToken을 헤더에 실어서 보내는 메소드
      */
     public void sendAccessAndRefreshToken(HttpServletResponse response, String accessToken, String refreshToken) {
         response.setStatus(HttpServletResponse.SC_OK);
@@ -162,6 +162,7 @@ public class JwtService {
                 );
     }
 
+    /** 토큰 유효성 검사 **/
     public boolean isTokenValid(String token) {
         try {
             JWT.require(Algorithm.HMAC512(secretKey)).build().verify(token);

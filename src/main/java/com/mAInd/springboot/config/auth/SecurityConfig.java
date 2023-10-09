@@ -89,13 +89,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.build();
     }
 
-    //[PART 1]
+    /** [PART 1], Provider에 설정할 PasswordEncoder를 빈으로 등록 **/
     @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-    //[PART 2]
+
     /**
      * AuthenticationManager 설정 후 등록
      * PasswordEncoder를 사용하는 AuthenticationProvider 지정 (PasswordEncoder는 위에서 등록한 PasswordEncoder 사용)
