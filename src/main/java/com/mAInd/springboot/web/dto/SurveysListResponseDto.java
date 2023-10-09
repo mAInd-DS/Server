@@ -25,9 +25,6 @@ public class SurveysListResponseDto {
     private String q_6;
     private String q_7;
     private String q_8;
-    private String q_9;
-    private String q_10;
-    private String q_11;
 //    private Users client_id;
 //    private Long counselor_id;
 
@@ -51,9 +48,6 @@ public class SurveysListResponseDto {
         this.q_6 = entity.getQ_6();
         this.q_7 = entity.getQ_7();
         this.q_8 = entity.getQ_8();
-        this.q_9 = entity.getQ_9();
-        this.q_10 = entity.getQ_10();
-        this.q_11 = entity.getQ_11();
 //        this.client_id = entity.getClient_id();
 //        this.counselor_id = entity.getCounselor_id();
         this.modifiedDate = entity.getModifiedDate();

@@ -39,7 +39,7 @@ public class SurveysSaveRequestDto {
                                  String phone, String education, List<String> symptoms,
                                  String q_1, String q_2,
                                  String q_3, String q_4, String q_5, String q_6, String q_7,
-                                 String q_8, String q_9, String q_10, String q_11){
+                                 String q_8){
         this.name = name;
         this.gender = gender;
         this.email = email;
@@ -55,9 +55,6 @@ public class SurveysSaveRequestDto {
         this.q_6 = q_6;
         this.q_7 = q_7;
         this.q_8 = q_8;
-        this.q_9 = q_9;
-        this.q_10 = q_10;
-        this.q_11 = q_11;
     }
 
     public Surveys toEntity(){
@@ -77,9 +74,6 @@ public class SurveysSaveRequestDto {
                 .q_6(q_6)
                 .q_7(q_7)
                 .q_8(q_8)
-                .q_9(q_9)
-                .q_10(q_10)
-                .q_11(q_11)
                 .applyStatus(ApplyStatus.BEFORE)
                 .build();
     }
