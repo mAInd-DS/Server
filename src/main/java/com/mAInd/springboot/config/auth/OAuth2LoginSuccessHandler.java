@@ -44,11 +44,12 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 
                 userService.updateAuthorizeClient(oAuth2User.getEmail());
                 userService.updateRefreshToken(oAuth2User.getEmail(), refreshToken);
+                log.info(oAuth2User.getEmail());
 
-                String url = makeRedirectUrl(accessToken);
-                log.info("url: {}", url);
+//                String url = makeRedirectUrl(accessToken);
+//                log.info("url: {}", url);
 //                response.sendRedirect(url);
-                response.sendRedirect("/");
+//                response.sendRedirect("/");
 
 //                loginSuccess(response, oAuth2User);
 //
@@ -68,6 +69,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
     private void loginSuccess(HttpServletResponse response, CustomOAuth2User oAuth2User) throws IOException{
         String accessToken = jwtService.createAccessToken(oAuth2User.getEmail());
         String refreshToken = jwtService.createRefreshToken();
+
         response.addHeader(jwtService.getAccessHeader(), "Bearer " + accessToken);
         response.addHeader(jwtService.getRefreshHeader(), "Bearer " + refreshToken);
 

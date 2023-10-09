@@ -41,7 +41,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
 
-
         /**
          * userRequest에서 registrationId 추출 후 registrationId으로 SocialType 저장
          * http://localhost:8080/oauth2/authorization/google에서 google이 registrationId
@@ -73,6 +72,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     }
 
     private Users getUser(OAuthAttributes attributes){
+        log.info("getUser 실행");
         Users findUser = userRepository.findBySocialId(attributes.getOauth2UserInfo().getId()).orElse(null);
 
         if(findUser == null) {
@@ -86,12 +86,14 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
      * 생성된 User 객체를 DB에 저장 : socialType, socialId, email, role 값만 있는 상태
      */
     private Users saveUser(OAuthAttributes attributes) {
+        log.info("saveUser 실행");
         Users createdUser = attributes.toEntity(attributes.getOauth2UserInfo());
         return userRepository.save(createdUser);
     }
 
     /** 로그인 직후 User 권한을 Client로 업데이트 **/
     public void updateAuthorizeClient(String email) {
+        log.info("updateAuthorizeClient 실행");
         Users findUser = userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
         findUser.authorizeClient();
@@ -99,6 +101,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
     /** 로그인 직후 refreshToken db값 변경 **/
     public void updateRefreshToken(String email, String refreshToken){
+        log.info("updateRefreshToken 실행");
         Users findUser = userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
         findUser.updateRefreshToken(refreshToken);
