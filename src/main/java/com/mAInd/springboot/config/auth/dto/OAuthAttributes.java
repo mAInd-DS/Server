@@ -1,6 +1,7 @@
 package com.mAInd.springboot.config.auth.dto;
 
 import com.mAInd.springboot.domain.user.Role;
+import com.mAInd.springboot.domain.user.UserStatus;
 import com.mAInd.springboot.domain.user.Users;
 import lombok.Builder;
 import lombok.Getter;
@@ -52,6 +53,7 @@ public class OAuthAttributes {
                 .email(email)
                 .picture(picture)
                 .role(Role.CLIENT)
+                .userStatus(UserStatus.BEFORE_SURVEY)
                 .build();
     }
 }
