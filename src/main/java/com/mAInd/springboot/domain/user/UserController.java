@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 import java.util.Optional;
 
@@ -39,9 +40,10 @@ public class UserController {
     @ResponseBody
     public String currentUserName(Authentication authentication){
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
         return userDetails.getUsername();
     }
+
+
 
 
 }
