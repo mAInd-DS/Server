@@ -2,13 +2,19 @@ package com.mAInd.springboot.domain.surveys;
 
 import com.mAInd.springboot.domain.BaseTimeEntity;
 import com.mAInd.springboot.domain.surveys.Gender;
+import com.mAInd.springboot.domain.user.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
+import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+
+import static javax.persistence.FetchType.LAZY;
 
 @Getter
 @NoArgsConstructor
@@ -51,22 +57,32 @@ public class Surveys extends BaseTimeEntity {
     private String q_6;
     private String q_7;
     private String q_8;
-    private String q_9;
-    private String q_10;
-    private String q_11;
 
-    @Column(nullable = true)
-    private Long client_id;
+//    @Column(nullable = true)
+//    private Long client_id;
+
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "client_id", nullable = true)
+    @JsonIgnore
+    private Users client_id;
 
     @Column(nullable = true)
     private Long counselor_id;
+
+    @Enumerated(EnumType.STRING)
+    @Column
+    private ApplyStatus applyStatus;
+
+    @Column
+    private LocalDateTime statusDate;
 
 
     @Builder
     public Surveys(String name, Gender gender, String email, Date birth,
                    String phone, String education, List<String> symptoms,
-                   String q_1, String q_2,  String q_3, String q_4, String q_5, String q_6,
-                   String q_7, String q_8, String q_9, String q_10, String q_11, Long client_id, Long counselor_id) {
+                   String q_1, String q_2, String q_3, String q_4, String q_5, String q_6,
+                   String q_7, String q_8, Users client_id, Long counselor_id,
+                   ApplyStatus applyStatus, LocalDateTime statusDate) {
         this.name = name;
         this.gender = gender;
         this.email = email;
@@ -82,17 +98,15 @@ public class Surveys extends BaseTimeEntity {
         this.q_6 = q_6;
         this.q_7 = q_7;
         this.q_8 = q_8;
-        this.q_9 = q_9;
-        this.q_10 = q_10;
-        this.q_11 = q_11;
         this.client_id = client_id;
         this.counselor_id = counselor_id;
+        this.applyStatus = applyStatus;
+        this.statusDate = statusDate;
     }
 
     public void update(String name, Gender gender, String email, Date birth,
                        String phone, String education, List<String> symptoms, String q_1, String q_2,
-                       String q_3, String q_4, String q_5, String q_6, String q_7,
-                       String q_8, String q_9, String q_10, String q_11){
+                       String q_3, String q_4, String q_5, String q_6, String q_7, String q_8){
         this.name = name;
         this.gender = gender;
         this.email = email;
@@ -108,9 +122,6 @@ public class Surveys extends BaseTimeEntity {
         this.q_6 = q_6;
         this.q_7 = q_7;
         this.q_8 = q_8;
-        this.q_9 = q_9;
-        this.q_10 = q_10;
-        this.q_11 = q_11;
     }
 
 }

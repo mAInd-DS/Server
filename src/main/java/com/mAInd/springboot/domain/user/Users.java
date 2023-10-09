@@ -29,6 +29,10 @@ public class Users extends BaseTimeEntity {
     @Column(nullable = false)
     private Role role;
 
+    @Enumerated(EnumType.STRING)
+    @Column
+    private UserStatus userStatus;
+
 //    private String refreshToken;
 
 //    @OneToOne(fetch = FetchType.LAZY)
@@ -36,11 +40,12 @@ public class Users extends BaseTimeEntity {
 //    private Profiles profile_id;
 
     @Builder
-    public Users(String name, String email, String picture, Role role){
+    public Users(String name, String email, String picture, Role role, UserStatus userStatus){
         this.name = name;
         this.email = email;
         this.picture = picture;
         this.role = role;
+        this.userStatus = userStatus;
     }
 
     public Users update(String name, String picture){
