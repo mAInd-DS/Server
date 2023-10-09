@@ -1,7 +1,5 @@
 package com.mAInd.springboot.web;
 
-import com.mAInd.springboot.config.auth.LoginUser;
-import com.mAInd.springboot.config.auth.dto.SessionUser;
 import com.mAInd.springboot.service.profiles.ProfilesService;
 import com.mAInd.springboot.service.surveys.SurveysService;
 import com.mAInd.springboot.web.dto.ProfilesResponseDto;
@@ -21,17 +19,21 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 public class IndexController {
     private final ProfilesService profilesService;
-//    private final SurveysService surveysService;
     private final HttpSession httpSession;
 
+//    @GetMapping("/")
+//    public String index(Model model, @LoginUser SessionUser user){
+//       model.addAttribute("profiles", profilesService.findAllDesc());
+//       //세션에 저장된 값이 있을 때만 model에 userName으로 등록
+//       if(user != null){
+//           model.addAttribute("userNameIs", user.getName());
+//       }
+//       return "index";
+//    }
+
     @GetMapping("/")
-    public String index(Model model, @LoginUser SessionUser user){
-       model.addAttribute("profiles", profilesService.findAllDesc());
-       //세션에 저장된 값이 있을 때만 model에 userName으로 등록
-       if(user != null){
-           model.addAttribute("userNameIs", user.getName());
-       }
-       return "index";
+    public String index(){
+        return "index";
     }
 
     @GetMapping("/profiles/save")

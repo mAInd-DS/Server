@@ -1,0 +1,42 @@
+{{>layout/header}}
+
+<h3>마이페이지</h3>
+<div class="col-md-12">
+    {{>layout/nav}}
+    <div class="row">
+        <div class="col-md-6">
+            <br>
+            <a href="/mypage/surveys/save" role="button" class="btn btn-primary" style="float: right; margin-left: 10px;">초기 설문지 작성</a>
+            <a href="#" role="button" class="btn btn-primary" style="float: right; margin-left: 10px;">상담자 자격증 등록</a>
+<!--            {{#userNameIs}}-->
+<!--                Logged in as: <span id="user">{{userNameIs}}</span>-->
+<!--                <a href="/logout" class="btn btn-info active" role="button">Logout</a>-->
+<!--            {{/userNameIs}}-->
+<!--            {{^userNameIs}}-->
+<!--                <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>-->
+<!--            {{/userNameIs}}-->
+        </div>
+    </div>
+    <br>
+    <!-- 목록 출력 영역 -->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>초기 설문지 번호</th>
+            <th>초기 설문지</th>
+            <th>최종 수정일</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#surveys}}
+            <tr>
+                <td>{{survey_id}}</td>
+                <td><a href="/mypage/surveys/update/{{survey_id}}">{{name}}</a></td>
+                <td>{{modifiedDate}}</td>
+            </tr>
+        {{/surveys}}
+        </tbody>
+    </table>
+</div>
+
+{{>layout/footer-survey}}

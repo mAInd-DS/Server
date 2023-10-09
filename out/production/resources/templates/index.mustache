@@ -1,0 +1,35 @@
+{{>layout/header}}
+
+<!--<h1>mAInd 홈페이지</h1>-->
+<div class="col-md-12">
+    {{>layout/nav}}
+    <!--로그인 기능 영역-->
+    <div class="row">
+        <div class="col-md-6">
+            <br>
+            <a href="/profiles/save" role="button" class="btn btn-primary" style="float: right;">프로필 등록</a>
+        </div>
+    </div>
+    <br>
+    <!-- 목록 출력 영역 -->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>게시글 번호</th>
+            <th>제목</th>
+            <th>최종 수정일</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#profiles}}
+        <tr>
+            <td>{{profile_id}}</td>
+            <td><a href="/profiles/update/{{profile_id}}">{{title}}</a></td>
+            <td>{{modifiedDate}}</td>
+        </tr>
+        {{/profiles}}
+        </tbody>
+    </table>
+</div>
+
+{{>layout/footer}}
