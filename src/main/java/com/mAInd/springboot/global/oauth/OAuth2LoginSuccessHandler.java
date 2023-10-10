@@ -39,7 +39,11 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 //                String url = makeRedirectUrl(accessToken);
 //                log.info("url: {}", url);
 //                response.sendRedirect(url);
-                response.sendRedirect("/");
+                //response.sendRedirect("/");
+
+                String url = makeRedirectUrl(accessToken);
+                response.sendRedirect(url);
+                log.info("redirect url: {}", url);
             } else {
                 loginSuccess(response, oAuth2User); //로그인에 성공한 경우 access, refresh 토큰 생성
             }
@@ -57,11 +61,13 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         jwtService.sendAccessAndRefreshToken(response, accessToken, refreshToken);
         jwtService.updateRefreshToken(oAuth2User.getEmail(), refreshToken);
 
-        response.sendRedirect("/");
+        String url = makeRedirectUrl(accessToken);
+        response.sendRedirect(url);
+        log.info("redirect url: {}", url);
     }
 
     private String makeRedirectUrl(String token){
-        return UriComponentsBuilder.fromUriString("http://localhost:3000/oauth2/redirect" + token)
+        return UriComponentsBuilder.fromUriString("http://localhost:3000/oauth2/redirect/" + token)
                 .build().toUriString();
     }
 }
