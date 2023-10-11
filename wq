@@ -1,0 +1,152 @@
+[33mcommit 3aa2794a1b83120d656c01867c78473c59953a37[m[33m ([m[1;36mHEAD -> [m[1;32msurveyApi[m[33m, [m[1;31morigin/surveyApi[m[33m)[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Wed Oct 11 16:19:20 2023 +0900
+
+    feat #1 [설문지] 설문지 작ì작성자 정보 저장
+
+[33mcommit 52c181acb6bdc8ebfe2fd4b7d18b3ee85c8cfa4b[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Wed Oct 11 14:23:25 2023 +0900
+
+    feat #3 [로그인] withClaim에 이름, 역할, 상태 추가
+
+[33mcommit 216a8857669ff34c00d81f088a5af6a17c122a78[m[33m ([m[1;31morigin/setTokenHeader[m[33m, [m[1;32msetTokenHeader[m[33m)[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Wed Oct 11 00:50:55 2023 +0900
+
+    feat #3 [로ê¸그인] withClaim을 통한 token에 회원정보 전달
+
+[33mcommit dd59091a244058177efc9cc722c53e78be594bdc[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Tue Oct 10 16:39:37 2023 +0900
+
+    feat #3 [로그인] r webConfig 수정
+
+[33mcommit 67e801ad4b076008c97506e75f30197310d94f9a[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Tue Oct 10 16:28:03 2023 +0900
+
+    feat #3 [로그인] r antMatchers(HttpMethod.OPTIONS) 추가
+
+[33mcommit 70daadf119705f306c24153ed2c156007f852243[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Tue Oct 10 13:19:48 2023 +0900
+
+    feat #3 [로그인] reexposedHeaders(Authorization) 추가
+
+[33mcommit 041042afcca62d4b96eea39daea280ff4dc8f964[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Tue Oct 10 13:02:14 2023 +0900
+
+    feat #3 [로그인] redirectUrl 변경
+
+[33mcommit 455886df5bba812dc8421d74a1b1dacea38a51f1[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Tue Oct 10 03:42:58 2023 +0900
+
+    feat #0 [정리]
+
+[33mcommit 8ed431999c5f3d5029565bb9f24f46965276d4b1[m[33m ([m[1;31morigin/mergeLogin[m[33m, [m[1;32mmergeLogin[m[33m)[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Tue Oct 10 03:08:16 2023 +0900
+
+    feat #3 [로그인] 병합 완료
+
+[33mcommit c0806139135a31be957184d9a84fe902f908f32d[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Tue Oct 10 01:33:59 2023 +0900
+
+    임시저장
+
+[33mcommit f653e577235ae58eeaa45ad513403ff375335c8f[m
+Merge: e2091f0 2430d31
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Tue Oct 10 00:46:52 2023 +0900
+
+    lo로그인 Merge
+
+[33mcommit e2091f0a6b7f87ded94fb8ecc4279ba701f292b4[m
+Merge: a6da7e9 9a81f49
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Tue Oct 10 00:37:29 2023 +0900
+
+    Merge branch 'master' of https://github.com/mAInd-DS/Server
+
+[33mcommit 2430d319f4971368a290e0ae10175a6eaa1ed9e0[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Tue Oct 10 00:35:00 2023 +0900
+
+    feat #3 [로그인] google oauth 구현 중
+
+[33mcommit 9a81f4931289eccdb17427c830b5d1d443b5bc5b[m
+Merge: 248dec4 939558c
+Author: 지원 <81094055+ji-vvon@users.noreply.github.com>
+Date:   Mon Oct 9 16:02:01 2023 +0900
+
+    Merge pull request #3 from mAInd-DS/forsurveytest
+    
+    feat #1 [초기설문지] q9-q11 삭제
+
+[33mcommit a6da7e9cd68833687b3cd7cae0db30b216cc3716[m
+Merge: 248dec4 939558c
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Mon Oct 9 16:00:57 2023 +0900
+
+    Merge branch 'forsurveytest'
+
+[33mcommit 939558cceadbbe1541b873cb82aeb54babaf492e[m[33m ([m[1;31morigin/forsurveytest[m[33m, [m[1;32mforsurveytest[m[33m)[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Mon Oct 9 16:00:44 2023 +0900
+
+    feat #1 [초기설문지] q9-q11 삭제
+
+[33mcommit 484c83d014e3213e304804efd7a2df62127e702c[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Sat Oct 7 02:40:20 2023 +0900
+
+    Feat #1 [초기설문지] applyStatus 컬럼 추가
+
+[33mcommit 3a254a7f5066fdf3e41920211f42878b1837f55b[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Sat Oct 7 01:58:49 2023 +0900
+
+    feat #3 [로그인] branch 변경
+
+[33mcommit c9ce045088eab237bd7a8df30756b44c400402a2[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Sat Oct 7 01:37:01 2023 +0900
+
+    feat #2 [마이페이지] 임ìê기본 뼈대 구축
+
+[33mcommit 9cf0ae8cad5d5a6174828c5718b055297b493f51[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Sat Oct 7 00:59:49 2023 +0900
+
+    feat #1 [초기설문지] client ManytoOne 설정
+
+[33mcommit 248dec497af7211002cc7bbd20ec5634a0238bef[m
+Merge: ce0f9e0 66a2531
+Author: 지원 <81094055+ji-vvon@users.noreply.github.com>
+Date:   Fri Oct 6 22:51:08 2023 +0900
+
+    Merge pull request #2 from mAInd-DS/forsurveytest
+    
+    feat #1 [초기설문지] CRUD 수정
+
+[33mcommit 66a2531878c88593efec8edb63e275b3ffd5b45f[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Fri Oct 6 22:41:02 2023 +0900
+
+    feat [초기#1 sur설문지 CRUD ER수정
+
+[33mcommit 3bff32f8fe21938850d8e079c56e1e9f897e75b7[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Fri Oct 6 19:42:27 2023 +0900
+
+    feat test
+
+[33mcommit ce0f9e050420dd173e32fc59dee7fc8ed7c87809[m
+Author: ji-vvon <jjw9895@duksung.ac.kr>
+Date:   Fri Oct 6 18:49:33 2023 +0900
+
+    feat loginìbranch 이동을 위한 임commit

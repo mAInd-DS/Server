@@ -6,13 +6,13 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 @Getter
-public class MyPageResponseDto {
+public class MyInfoResponseDto {
 
     private String name;
     private String email;
     private LocalDateTime createdDate;
 
-    public MyPageResponseDto(Users entity){
+    public MyInfoResponseDto(Users entity){
         this.name = entity.getName();
         this.email = entity.getEmail();
         this.createdDate = entity.getCreatedDate();

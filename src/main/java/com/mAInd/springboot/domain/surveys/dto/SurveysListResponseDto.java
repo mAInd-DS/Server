@@ -2,11 +2,12 @@ package com.mAInd.springboot.domain.surveys.dto;
 
 import com.mAInd.springboot.domain.surveys.entity.Gender;
 import com.mAInd.springboot.domain.surveys.entity.Surveys;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
-
+@Getter
 public class SurveysListResponseDto {
     private Long survey_id;
     private String name;
@@ -23,9 +24,6 @@ public class SurveysListResponseDto {
     private String q_6;
     private String q_7;
     private String q_8;
-//    private Users client_id;
-//    private Long counselor_id;
-
     private List<String> symptoms;
     private LocalDateTime modifiedDate;
 
@@ -46,8 +44,6 @@ public class SurveysListResponseDto {
         this.q_6 = entity.getQ_6();
         this.q_7 = entity.getQ_7();
         this.q_8 = entity.getQ_8();
-//        this.client_id = entity.getClient_id();
-//        this.counselor_id = entity.getCounselor_id();
         this.modifiedDate = entity.getModifiedDate();
     }
 }

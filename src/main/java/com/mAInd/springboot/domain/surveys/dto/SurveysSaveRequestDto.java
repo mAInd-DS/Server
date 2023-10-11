@@ -3,6 +3,7 @@ package com.mAInd.springboot.domain.surveys.dto;
 import com.mAInd.springboot.domain.surveys.entity.ApplyStatus;
 import com.mAInd.springboot.domain.surveys.entity.Gender;
 import com.mAInd.springboot.domain.surveys.entity.Surveys;
+import com.mAInd.springboot.domain.user.entity.Users;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,17 +30,20 @@ public class SurveysSaveRequestDto {
     private String q_6;
     private String q_7;
     private String q_8;
-    private String q_9;
-    private String q_10;
-    private String q_11;
 
+    private Users client_id;
+
+
+    public void setUserInfo(Users user) {
+        this.client_id = user;
+    }
 
     @Builder
     public SurveysSaveRequestDto(String name, Gender gender, String email, Date birth,
                                  String phone, String education, List<String> symptoms,
                                  String q_1, String q_2,
                                  String q_3, String q_4, String q_5, String q_6, String q_7,
-                                 String q_8){
+                                 String q_8, Users client_id){
         this.name = name;
         this.gender = gender;
         this.email = email;
@@ -55,6 +59,7 @@ public class SurveysSaveRequestDto {
         this.q_6 = q_6;
         this.q_7 = q_7;
         this.q_8 = q_8;
+        this.client_id = client_id;
     }
 
     public Surveys toEntity(){
@@ -75,6 +80,9 @@ public class SurveysSaveRequestDto {
                 .q_7(q_7)
                 .q_8(q_8)
                 .applyStatus(ApplyStatus.BEFORE)
+                .client_id(client_id)
                 .build();
     }
+
+
 }

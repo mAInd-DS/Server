@@ -59,11 +59,38 @@ public class SurveysService {
         return new SurveysStatusResponseDto(entity);
     }
 
+    @Transactional
+    public SurveysResponseDto findById3(Long survey_id){
+        Surveys entity = surveysRepository.findById(survey_id)
+                .orElseThrow(()-> new
+                        IllegalArgumentException("해당 설문지가 없습니다. survey_id=" + survey_id));
+        return new SurveysResponseDto(entity);
+    }
+
     @Transactional(readOnly = true)
     public List<SurveysListResponseDto> findAllDesc(){
         return surveysRepository.findAllDesc().stream()
                 .map(SurveysListResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    @Transactional(readOnly = true)
+    public List<CounselorApplyListResponseDto> findSurveysByCounselorId(Long counselorId) {
+        return surveysRepository.findSurveysByCounselorId(counselorId).stream()
+                .map(CounselorApplyListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+
+    // 상담자가 내담자 설문지 확인 후 상태 변경
+    @Transactional
+    public Long updateStatus(Long survey_id, SurveyStatusUpdateRequestDto requestDto){
+        Surveys surveys = surveysRepository.findById(survey_id)
+                .orElseThrow(() -> new
+                        IllegalArgumentException("해당 설문지가 없습니다. survey_id="+survey_id));
+        surveys.updateStatus(requestDto.getApplyStatus(), requestDto.getStatusDate());
+        return survey_id;
+    }
+
 
 }
