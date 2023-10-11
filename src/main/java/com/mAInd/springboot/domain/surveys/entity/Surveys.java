@@ -126,4 +126,9 @@ public class Surveys extends BaseTimeEntity {
         this.q_8 = q_8;
     }
 
+    public void updateStatus(ApplyStatus applyStatus, LocalDateTime statusDate){
+        this.applyStatus = applyStatus;
+        this.statusDate = statusDate;
+    }
+
 }
