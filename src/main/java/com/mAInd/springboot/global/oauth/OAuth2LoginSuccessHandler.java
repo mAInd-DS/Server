@@ -28,18 +28,14 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         try {
             CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
 
-            // User의 Role이 GUEST일 경우 처음 요청한 회원이므로 회원가입 페이지로 리다이렉트,
+            // User의 Role이 GUEST일 경우 처음 요청한 회원
             if (oAuth2User.getRole() == Role.GUEST) {
+                userService.updateAuthorizeClient(oAuth2User.getEmail()); //유저의 Role을 Client로 변경(자동)
+
                 String accessToken = jwtService.createAccessToken(oAuth2User.getEmail());
                 response.addHeader(jwtService.getAccessHeader(), "Bearer " + accessToken);
-                jwtService.sendAccessAndRefreshToken(response, accessToken, null);
 
-                userService.updateAuthorizeClient(oAuth2User.getEmail());
-//                userService.updateRefreshToken(oAuth2User.getEmail(), refreshToken);
-//                String url = makeRedirectUrl(accessToken);
-//                log.info("url: {}", url);
-//                response.sendRedirect(url);
-                //response.sendRedirect("/");
+                jwtService.sendAccessAndRefreshToken(response, accessToken, null);
 
                 String url = makeRedirectUrl(accessToken);
                 response.sendRedirect(url);

@@ -47,10 +47,9 @@ public class JwtService {
     private static final String EMAIL_CLAIM = "email";
 
     private static final String NAME_CLAIM = "name";
-
     private static final String ROLE_CLAIM = "role";
-
     private static final String STATUS_CLAIM = "status";
+
     private static final String BEARER = "Bearer ";
 
     private final UserRepository userRepository;
@@ -59,12 +58,14 @@ public class JwtService {
      * AccessToken 생성 메소드
      */
     public String createAccessToken(String email) {
+        log.info("createAccessToken 실행");
         Date now = new Date();
 
         String name = null;
         String role = null;
         String status = null;
 
+        // 토큰의 payload에 넣을 name, role, status 정보 생성
         Optional<Users> findUser = userRepository.findByEmail(email);
         if(findUser.isPresent()){
             name = findUser.get().getName();
@@ -77,13 +78,14 @@ public class JwtService {
 
         return JWT.create() // JWT 토큰을 생성하는 빌더 반환
                 .withSubject(ACCESS_TOKEN_SUBJECT) // JWT의 Subject 지정 -> AccessToken이므로 AccessToken
-                .withExpiresAt(new Date(now.getTime() + accessTokenExpirationPeriod)) // 토큰 만료 시간 설정
+                //.withExpiresAt(new Date(now.getTime() + accessTokenExpirationPeriod)) // 토큰 만료 시간 설정
 
                 //클레임으로는 email을 사용
                 //추가적으로 식별자나, 이름 등의 정보를 더 추가해도 됨
                 //추가할 경우 .withClaim(클래임 이름, 클래임 값) 으로 설정
                 .withClaim(EMAIL_CLAIM, email)
 
+                //클레임에 이름, 역할, 상태 정보 추가
                 .withClaim(NAME_CLAIM, name)
                 .withClaim(ROLE_CLAIM, role)
                 .withClaim(STATUS_CLAIM, status)
