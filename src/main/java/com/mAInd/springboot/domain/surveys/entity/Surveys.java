@@ -59,13 +59,17 @@ public class Surveys extends BaseTimeEntity {
 //    @Column(nullable = true)
 //    private Long client_id;
 
+    //내담자(설문지를 작성하는 유저 id)
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "client_id", nullable = true)
     @JsonIgnore
     private Users client_id;
 
-    @Column(nullable = true)
-    private Long counselor_id;
+    //상담자(서버 자동 매칭)
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "counselor_id", nullable = true)
+    @JsonIgnore
+    private Users counselor_id;
 
     @Enumerated(EnumType.STRING)
     @Column
@@ -79,7 +83,7 @@ public class Surveys extends BaseTimeEntity {
     public Surveys(String name, Gender gender, String email, Date birth,
                    String phone, String education, List<String> symptoms,
                    String q_1, String q_2, String q_3, String q_4, String q_5, String q_6,
-                   String q_7, String q_8, Users client_id, Long counselor_id,
+                   String q_7, String q_8, Users client_id, Users counselor_id,
                    ApplyStatus applyStatus, LocalDateTime statusDate) {
         this.name = name;
         this.gender = gender;

@@ -2,10 +2,17 @@ package com.mAInd.springboot.domain.surveys.controller;
 
 import com.mAInd.springboot.domain.surveys.dto.*;
 import com.mAInd.springboot.domain.surveys.service.SurveysService;
+import com.mAInd.springboot.domain.user.entity.Users;
+import com.mAInd.springboot.domain.user.repository.UserRepository;
+import com.mAInd.springboot.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RequiredArgsConstructor
@@ -14,8 +21,23 @@ public class SurveysApiController {
 
     private final SurveysService surveysService;
 
+    private final UserService userService;
+    private final UserRepository userRepository;
+    private Authentication authentication;
+
+
     @PostMapping("/mypage/surveys")
     public Long save(@RequestBody SurveysSaveRequestDto requestDto){
+
+        // 설문지 작성 시 유저 정보 저장
+        User userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+        Optional<Users> findUser = userRepository.findByEmail(username);
+        if(findUser.isPresent()){
+            Users user = findUser.get();
+            requestDto.setUserInfo(user);
+            return surveysService.save(requestDto);
+        }
         return surveysService.save(requestDto);
     }
 

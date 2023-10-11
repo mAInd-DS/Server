@@ -3,6 +3,7 @@ package com.mAInd.springboot.domain.surveys.dto;
 import com.mAInd.springboot.domain.surveys.entity.ApplyStatus;
 import com.mAInd.springboot.domain.surveys.entity.Gender;
 import com.mAInd.springboot.domain.surveys.entity.Surveys;
+import com.mAInd.springboot.domain.user.entity.Users;
 import lombok.Getter;
 
 import java.util.Date;
@@ -26,8 +27,8 @@ public class SurveysResponseDto {
     private String q_6;
     private String q_7;
     private String q_8;
-//    private Users client_id;
-//    private Long counselor_id;
+
+    //    private Long counselor_id;
 
     private ApplyStatus applyStatus;
 
@@ -49,8 +50,6 @@ public class SurveysResponseDto {
         this.q_6 = entity.getQ_6();
         this.q_7 = entity.getQ_7();
         this.q_8 = entity.getQ_8();
-//        this.client_id = entity.getClient_id();
-//        this.counselor_id = entity.getCounselor_id();
         this.applyStatus = entity.getApplyStatus();
     }
 }
