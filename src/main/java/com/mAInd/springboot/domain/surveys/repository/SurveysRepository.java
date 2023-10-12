@@ -14,4 +14,7 @@ public interface SurveysRepository extends JpaRepository<Surveys, Long> {
     @Query("SELECT s FROM Surveys s WHERE s.counselor_id.user_id = :counselorId")
     List<Surveys> findSurveysByCounselorId(@Param("counselorId") Long counselorId);
 
+    @Query("SELECT s FROM Surveys s WHERE s.counselor_id.user_id = :counselorId AND s.applyStatus = 'ACCEPT'")
+    List<Surveys> findAcceptedSurveysByCounselorId(@Param("counselorId") Long counselorId);
+
 }
