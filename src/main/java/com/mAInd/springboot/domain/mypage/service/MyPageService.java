@@ -1,6 +1,9 @@
 package com.mAInd.springboot.domain.mypage.service;
 
 import com.mAInd.springboot.domain.mypage.dto.MyInfoResponseDto;
+import com.mAInd.springboot.domain.surveys.dto.SurveysResponseDto;
+import com.mAInd.springboot.domain.surveys.entity.Surveys;
+import com.mAInd.springboot.domain.surveys.repository.SurveysRepository;
 import com.mAInd.springboot.domain.user.entity.Users;
 import com.mAInd.springboot.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +14,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Slf4j
@@ -19,11 +23,13 @@ import java.util.Optional;
 public class MyPageService {
 
     private final UserRepository userRepository;
+    private final SurveysRepository  surveysRepository;
 
     @Transactional
     public MyInfoResponseDto getMyInfo(){
         Users user = findUser();
-        return new MyInfoResponseDto(user);
+        Surveys survey = findSurvey(user);
+        return new MyInfoResponseDto(user,survey);
     }
 
 
@@ -39,6 +45,15 @@ public class MyPageService {
         }
         // TODO: 예외처리
         return null;
+    }
+
+    public Surveys findSurvey(Users user){
+        Long user_id = user.getUser_id();
+        Surveys survey = surveysRepository.findLatestSurveyByClientId(user_id);
+        if (survey == null) {
+            throw new NoSuchElementException("No survey found for user " + user_id);
+        }
+        return survey;
     }
 
 
