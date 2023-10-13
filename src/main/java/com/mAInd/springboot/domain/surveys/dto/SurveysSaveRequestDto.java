@@ -3,6 +3,7 @@ package com.mAInd.springboot.domain.surveys.dto;
 import com.mAInd.springboot.domain.surveys.entity.ApplyStatus;
 import com.mAInd.springboot.domain.surveys.entity.Gender;
 import com.mAInd.springboot.domain.surveys.entity.Surveys;
+import com.mAInd.springboot.domain.user.entity.UserStatus;
 import com.mAInd.springboot.domain.user.entity.Users;
 import lombok.Builder;
 import lombok.Getter;
@@ -63,6 +64,10 @@ public class SurveysSaveRequestDto {
     }
 
     public Surveys toEntity(){
+
+        //user의 userStatus 변경 (BEFORE_SURVEY -> ON_MATCHING)
+        client_id.setUserStatus(UserStatus.ON_MATCHING);
+
         return Surveys.builder()
                 .name(name)
                 .gender(gender)

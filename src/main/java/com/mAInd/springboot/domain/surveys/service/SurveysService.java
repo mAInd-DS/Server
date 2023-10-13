@@ -1,8 +1,11 @@
 package com.mAInd.springboot.domain.surveys.service;
 
 import com.mAInd.springboot.domain.surveys.dto.*;
+import com.mAInd.springboot.domain.surveys.entity.ApplyStatus;
 import com.mAInd.springboot.domain.surveys.entity.Surveys;
 import com.mAInd.springboot.domain.surveys.repository.SurveysRepository;
+import com.mAInd.springboot.domain.user.entity.UserStatus;
+import com.mAInd.springboot.domain.user.entity.Users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -88,6 +91,14 @@ public class SurveysService {
         Surveys surveys = surveysRepository.findById(survey_id)
                 .orElseThrow(() -> new
                         IllegalArgumentException("해당 설문지가 없습니다. survey_id="+survey_id));
+
+
+        //상담자가 상담을 수락한 경우 내담자의 userStatus 변경 (ON_MATCHING -> AFTER_MATCHING)
+        if(requestDto.getApplyStatus() == ApplyStatus.ACCEPT ){
+            Users client_id = surveys.getClient_id();
+            client_id.setUserStatus(UserStatus.AFTER_MATCHING);
+        }
+
         surveys.updateStatus(requestDto.getApplyStatus(), requestDto.getStatusDate());
         return survey_id;
     }

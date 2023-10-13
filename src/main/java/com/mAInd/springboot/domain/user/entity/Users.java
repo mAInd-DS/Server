@@ -80,5 +80,10 @@ public class Users extends BaseTimeEntity {
         this.password = passwordEncoder.encode(this.password);
     }
 
+    //유저 userStatus 상태변경
+    public void setUserStatus(UserStatus userStatus){
+        this.userStatus = userStatus;
+    }
+
 
 }
