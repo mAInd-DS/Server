@@ -23,7 +23,13 @@ public class MyInfoResponseDto {
         this.email = entity.getEmail();
         this.createdDate = entity.getCreatedDate();
         this.picture = entity.getPicture();
-        this.survey_id = surveyEntity.getSurvey_id();
+        //Survey가 없는 경우 survey_id = 0 반환(상담자이거나 내담자인데 아직 작성하지 않은 경우)
+        if (surveyEntity != null) {
+            this.survey_id = surveyEntity.getSurvey_id();
+        } else {
+            this.survey_id = 0L;
+        }
+
     }
 
 

@@ -50,9 +50,6 @@ public class MyPageService {
     public Surveys findSurvey(Users user){
         Long user_id = user.getUser_id();
         Surveys survey = surveysRepository.findLatestSurveyByClientId(user_id);
-        if (survey == null) {
-            throw new NoSuchElementException("No survey found for user " + user_id);
-        }
         return survey;
     }
 
