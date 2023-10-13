@@ -12,10 +12,13 @@ public class MyInfoResponseDto {
     private String email;
     private LocalDateTime createdDate;
 
+    private String picture;
+
     public MyInfoResponseDto(Users entity){
         this.name = entity.getName();
         this.email = entity.getEmail();
         this.createdDate = entity.getCreatedDate();
+        this.picture = entity.getPicture();
     }
 
 
