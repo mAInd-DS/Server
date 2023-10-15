@@ -1,6 +1,7 @@
 package com.mAInd.springboot.domain.mypage.service;
 
 import com.mAInd.springboot.domain.mypage.dto.MyInfoResponseDto;
+import com.mAInd.springboot.domain.mypage.dto.MyStatusResponseDto;
 import com.mAInd.springboot.domain.surveys.dto.SurveysResponseDto;
 import com.mAInd.springboot.domain.surveys.entity.Surveys;
 import com.mAInd.springboot.domain.surveys.repository.SurveysRepository;
@@ -30,6 +31,12 @@ public class MyPageService {
         Users user = findUser();
         Surveys survey = findSurvey(user);
         return new MyInfoResponseDto(user,survey);
+    }
+
+    @Transactional
+    public MyStatusResponseDto getMyStatus(){
+        Users user = findUser();
+        return new MyStatusResponseDto(user);
     }
 
 
