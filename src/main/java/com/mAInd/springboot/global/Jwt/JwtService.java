@@ -50,6 +50,8 @@ public class JwtService {
     private static final String ROLE_CLAIM = "role";
     private static final String STATUS_CLAIM = "status";
 
+    private static final String PICTURE_CLAIM = "picture";
+
     private static final String BEARER = "Bearer ";
 
     private final UserRepository userRepository;
@@ -64,6 +66,7 @@ public class JwtService {
         String name = null;
         String role = null;
         String status = null;
+        String picture = null;
 
         // 토큰의 payload에 넣을 name, role, status 정보 생성
         Optional<Users> findUser = userRepository.findByEmail(email);
@@ -71,7 +74,8 @@ public class JwtService {
             name = findUser.get().getName();
             role = String.valueOf(findUser.get().getRole());
             status = String.valueOf(findUser.get().getUserStatus());
-            log.info("name: {} role: {} status: {}", name, role, status);
+            picture = String.valueOf(findUser.get().getPicture());
+            log.info("name: {} role: {} status: {} picture: {}", name, role, status, picture);
         }else{
             log.info("user 정보를 불러오지 못함");
         }
@@ -89,6 +93,7 @@ public class JwtService {
                 .withClaim(NAME_CLAIM, name)
                 .withClaim(ROLE_CLAIM, role)
                 .withClaim(STATUS_CLAIM, status)
+                .withClaim(PICTURE_CLAIM, picture)
 
                 .sign(Algorithm.HMAC512(secretKey)); // HMAC512 알고리즘 사용, application.properties에서 지정한 secret 키로 암호화
     }
