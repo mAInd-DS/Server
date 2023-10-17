@@ -25,5 +25,6 @@ public class MyPageController {
     }
 
     @GetMapping("/mypage/status")
-    public MyStatusResponseDto getMyStatus() {return myPageService.getMyStatus();}
+    public MyStatusResponseDto getMyStatus() {
+        return myPageService.getMyStatus();}
 }

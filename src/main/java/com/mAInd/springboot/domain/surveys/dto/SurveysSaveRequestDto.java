@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +34,8 @@ public class SurveysSaveRequestDto {
     private String q_8;
 
     private Users client_id;
+
+
 
 
     public void setUserInfo(Users user) {
@@ -86,6 +89,7 @@ public class SurveysSaveRequestDto {
                 .q_8(q_8)
                 .applyStatus(ApplyStatus.BEFORE)
                 .client_id(client_id)
+                .statusDate(LocalDateTime.now())
                 .build();
     }
 

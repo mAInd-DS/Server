@@ -36,7 +36,8 @@ public class MyPageService {
     @Transactional
     public MyStatusResponseDto getMyStatus(){
         Users user = findUser();
-        return new MyStatusResponseDto(user);
+        Surveys survey = findSurvey(user);
+        return new MyStatusResponseDto(user, survey);
     }
 
 
