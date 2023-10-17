@@ -18,7 +18,6 @@ public class CounselingSaveRequestDto {
     private Long endHour;
     private Long endMin;
     private Long countNum;
-    private String videoName;
 
 //    public void setSurveyId(Surveys survey){
 //        this.survey_id = survey;
@@ -26,7 +25,7 @@ public class CounselingSaveRequestDto {
 
     @Builder
     public CounselingSaveRequestDto(Long survey_id, Date date, Long startHour, Long startMin,
-                                    Long endHour, Long endMin, Long countNum, String videoName){
+                                    Long endHour, Long endMin, Long countNum){
         this.survey_id = survey_id;
         this.date = date;
         this.startHour = startHour;
@@ -34,7 +33,6 @@ public class CounselingSaveRequestDto {
         this.endHour = endHour;
         this.endMin = endMin;
         this.countNum = countNum;
-        this.videoName = videoName;
     }
 
     public Counseling toEntity(){
@@ -46,7 +44,6 @@ public class CounselingSaveRequestDto {
                 .endHour(endHour)
                 .endMin(endMin)
                 .countNum(countNum)
-                .videoName(videoName)
                 .build();
     }
 

@@ -16,8 +16,6 @@ public class CounselingResponseDto {
     private Long endHour;
     private Long endMin;
     private Long countNum;
-    private String videoName;
-
     public CounselingResponseDto(Counseling entity){
         this.counseling_id = entity.getCounseling_id();
         this.survey_id = entity.getSurvey_id();
@@ -27,7 +25,6 @@ public class CounselingResponseDto {
         this.endHour = entity.getEndHour();
         this.endMin = entity.getEndMin();
         this.countNum = entity.getCountNum();
-        this.videoName = entity.getVideoName();
     }
 
 }

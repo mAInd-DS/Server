@@ -47,13 +47,11 @@ public class Counseling {
     @Column(length=5,nullable = false)
     private Long countNum;
 
-    @Column(length = 100, nullable = true)
-    private String videoName;
 
 
     @Builder
     public Counseling(Long survey_id, Date date, Long startHour, Long startMin,
-                      Long endHour, Long endMin, Long countNum, String videoName){
+                      Long endHour, Long endMin, Long countNum){
         this.survey_id = survey_id;
         this.date = date;
         this.startHour = startHour;
@@ -61,7 +59,6 @@ public class Counseling {
         this.endHour = endHour;
         this.endMin = endMin;
         this.countNum = countNum;
-        this.videoName = videoName;
     }
 
 
