@@ -57,12 +57,18 @@ public class Counseling {
     @Column
     private List<TotalPercentages> totalPercentages = new ArrayList<TotalPercentages>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "counseling", cascade = CascadeType.ALL)
+    @Column
+    private List<MergedArray> mergedArrays = new ArrayList<MergedArray>();
+
 
     @Builder
     public Counseling(Long surveyId, Date date, Long startHour, Long startMin,
                       Long endHour, Long endMin, Long countNum,
                       List<SentencePrediction> sentencePredictions,
-                      List<TotalPercentages> totalPercentages){
+                      List<TotalPercentages> totalPercentages,
+                      List<MergedArray> mergedArrays){
         this.surveyId = surveyId;
         this.date = date;
         this.startHour = startHour;
@@ -72,6 +78,7 @@ public class Counseling {
         this.countNum = countNum;
         this.sentencePredictions = sentencePredictions;
         this.totalPercentages = totalPercentages;
+        this.mergedArrays = mergedArrays;
     }
 
     public void clearSentencePredictions() {
@@ -105,6 +112,23 @@ public class Counseling {
         }else{
             this.totalPercentages = newTotalPercentages;
             log.info("Set totalPercentages to a new list");
+        }
+    }
+
+    public void clearMergedArrays() {
+        if (this.mergedArrays != null) {
+            log.info("clear mergedArrays");
+            this.mergedArrays.clear();
+        }
+    }
+
+    public void setMergedArrays(List<MergedArray> newMergedArrays) {
+        if (newMergedArrays == null) {
+            this.mergedArrays = new ArrayList<>(); // 빈 리스트 생성
+            log.info("Created a new mergedArrays list");
+        } else {
+            this.mergedArrays = newMergedArrays; // 새로운 리스트 설정
+            log.info("Set mergedArrays to a new list");
         }
     }
 

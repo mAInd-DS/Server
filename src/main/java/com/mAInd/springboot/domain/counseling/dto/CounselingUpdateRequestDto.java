@@ -1,6 +1,7 @@
 package com.mAInd.springboot.domain.counseling.dto;
 
 import com.mAInd.springboot.domain.counseling.entity.Counseling;
+import com.mAInd.springboot.domain.counseling.entity.MergedArray;
 import com.mAInd.springboot.domain.counseling.entity.SentencePrediction;
 import com.mAInd.springboot.domain.counseling.entity.TotalPercentages;
 import lombok.Builder;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 public class CounselingUpdateRequestDto {
     private List<SentencePredictionDto> sentence_predictions;
     private List<TotalPercentagesDto> total_percentages;
+    private List<MergedArrayDto> merged_array;
 
     @Builder
     public CounselingUpdateRequestDto(List<SentencePredictionDto> sentence_predictions, List<TotalPercentagesDto> total_percentages) {
@@ -67,6 +69,28 @@ public class CounselingUpdateRequestDto {
                 })
                 .collect(Collectors.toList());
         return totalPercentageEntities;
+    }
+
+    public List<MergedArray> toEntityListMA(Counseling counseling) {
+        if (merged_array == null) {
+            log.info("merged_array == null");
+            return Collections.emptyList(); // 빈 리스트 반환 또는 예외 처리
+        }
+
+        log.info("Converting merged_array to entities:");
+        merged_array.forEach(dto -> {
+            log.info("speakers: " + dto.getSpeakers() + ", Sentences: " + dto.getSentence());
+        });
+
+
+        List<MergedArray> mergedArraysEntities = merged_array.stream()
+                .map(dto -> {
+                    MergedArray entity = dto.toEntity();
+                    entity.setCounseling(counseling);
+                    return entity;
+                })
+                .collect(Collectors.toList());
+        return mergedArraysEntities;
     }
 
 }

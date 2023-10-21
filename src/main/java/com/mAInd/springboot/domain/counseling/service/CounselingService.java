@@ -2,6 +2,7 @@ package com.mAInd.springboot.domain.counseling.service;
 
 import com.mAInd.springboot.domain.counseling.dto.*;
 import com.mAInd.springboot.domain.counseling.entity.Counseling;
+import com.mAInd.springboot.domain.counseling.entity.MergedArray;
 import com.mAInd.springboot.domain.counseling.entity.SentencePrediction;
 import com.mAInd.springboot.domain.counseling.entity.TotalPercentages;
 import com.mAInd.springboot.domain.counseling.repository.CounselingRepository;
@@ -45,6 +46,13 @@ public class CounselingService {
         }
         counseling.clearTotalPercentages();;
         counseling.setTotalPercentages(newTotalPercentages);
+
+        List<MergedArray> newMergedArrays = requestDto.toEntityListMA(counseling);
+        if (newMergedArrays == null){
+            throw new IllegalArgumentException("새 MergedArrays 목록이 null입니다.");
+        }
+        counseling.clearMergedArrays();;
+        counseling.setMergedArrays(newMergedArrays);
 
         counselingRepository.save(counseling);
         return counseling.getCounseling_id();

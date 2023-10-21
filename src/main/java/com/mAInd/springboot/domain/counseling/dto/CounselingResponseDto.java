@@ -1,7 +1,6 @@
 package com.mAInd.springboot.domain.counseling.dto;
 
 import com.mAInd.springboot.domain.counseling.entity.Counseling;
-import com.mAInd.springboot.domain.counseling.entity.SentencePrediction;
 import lombok.Getter;
 
 import java.util.Date;
@@ -20,6 +19,7 @@ public class CounselingResponseDto {
     private Long countNum;
     private List<SentencePredictionDto> sentence_predictions;
     private List<TotalPercentagesDto> total_percentages;
+    private List<MergedArrayDto> merged_array;
 
     public CounselingResponseDto(Counseling entity){
         this.counseling_id = entity.getCounseling_id();
@@ -37,6 +37,10 @@ public class CounselingResponseDto {
         this.total_percentages = entity.getTotalPercentages()
                 .stream()
                 .map(TotalPercentagesDto::new)
+                .collect(Collectors.toList());
+        this.merged_array = entity.getMergedArrays()
+                .stream()
+                .map(MergedArrayDto::new)
                 .collect(Collectors.toList());
     }
 

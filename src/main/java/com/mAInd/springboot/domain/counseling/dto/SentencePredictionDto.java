@@ -1,6 +1,5 @@
 package com.mAInd.springboot.domain.counseling.dto;
 
-import com.mAInd.springboot.domain.counseling.entity.Counseling;
 import com.mAInd.springboot.domain.counseling.entity.SentencePrediction;
 import lombok.Builder;
 import lombok.Getter;
