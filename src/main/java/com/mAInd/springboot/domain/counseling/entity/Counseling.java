@@ -47,6 +47,9 @@ public class Counseling {
     @Column(length=5,nullable = false)
     private Long countNum;
 
+    @Column
+    private String opinion;
+
     @JsonIgnore
     @OneToMany(mappedBy = "counseling", cascade = CascadeType.ALL)
     @Column
@@ -62,13 +65,19 @@ public class Counseling {
     @Column
     private List<MergedArray> mergedArrays = new ArrayList<MergedArray>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "counseling", cascade = CascadeType.ALL)
+    @Column
+    private List<EmotionValues> emotionValues = new ArrayList<EmotionValues>();
+
 
     @Builder
     public Counseling(Long surveyId, Date date, Long startHour, Long startMin,
-                      Long endHour, Long endMin, Long countNum,
+                      Long endHour, Long endMin, Long countNum, String opinion,
                       List<SentencePrediction> sentencePredictions,
                       List<TotalPercentages> totalPercentages,
-                      List<MergedArray> mergedArrays){
+                      List<MergedArray> mergedArrays,
+                      List<EmotionValues> emotionValues){
         this.surveyId = surveyId;
         this.date = date;
         this.startHour = startHour;
@@ -76,18 +85,25 @@ public class Counseling {
         this.endHour = endHour;
         this.endMin = endMin;
         this.countNum = countNum;
+        this.opinion = opinion;
         this.sentencePredictions = sentencePredictions;
         this.totalPercentages = totalPercentages;
         this.mergedArrays = mergedArrays;
+        this.emotionValues = emotionValues;
     }
 
+    public void update(String opinion){
+        this.opinion = opinion;
+    }
+
+
+    /** sentencePredictions set & clear 함수 **/
     public void clearSentencePredictions() {
         if (this.sentencePredictions != null) {
             log.info("clear sentence predictions");
             this.sentencePredictions.clear();
         }
     }
-
     public void setSentencePredictions(List<SentencePrediction> newSentencePredictions) {
         if (newSentencePredictions == null) {
             this.sentencePredictions = new ArrayList<>(); // 빈 리스트 생성
@@ -98,13 +114,14 @@ public class Counseling {
         }
     }
 
+    /** TotalPercentages set & clear 함수 **/
+
     public void clearTotalPercentages(){
         if(this.totalPercentages != null){
             log.info("clear total percentages");
             this.totalPercentages.clear();
         }
     }
-
     public void setTotalPercentages(List<TotalPercentages> newTotalPercentages){
         if(newTotalPercentages == null){
             this.totalPercentages = new ArrayList<>();
@@ -115,13 +132,13 @@ public class Counseling {
         }
     }
 
+    /** MergedArrays set & clear 함수 **/
     public void clearMergedArrays() {
         if (this.mergedArrays != null) {
             log.info("clear mergedArrays");
             this.mergedArrays.clear();
         }
     }
-
     public void setMergedArrays(List<MergedArray> newMergedArrays) {
         if (newMergedArrays == null) {
             this.mergedArrays = new ArrayList<>(); // 빈 리스트 생성
@@ -132,5 +149,21 @@ public class Counseling {
         }
     }
 
+    /** EmotionValues set & clear 함수 **/
+    public void clearEmotionValues() {
+        if (this.emotionValues != null) {
+            log.info("clear emotionValues");
+            this.emotionValues.clear();
+        }
+    }
+    public void setEmotionValues(List<EmotionValues> newEmotionValues) {
+        if (newEmotionValues == null) {
+            this.emotionValues = new ArrayList<>(); // 빈 리스트 생성
+            log.info("Created a new emotionValues list");
+        } else {
+            this.emotionValues = newEmotionValues; // 새로운 리스트 설정
+            log.info("Set emotionValues to a new list");
+        }
+    }
 
 }

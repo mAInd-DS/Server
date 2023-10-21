@@ -1,10 +1,7 @@
 package com.mAInd.springboot.domain.counseling.service;
 
 import com.mAInd.springboot.domain.counseling.dto.*;
-import com.mAInd.springboot.domain.counseling.entity.Counseling;
-import com.mAInd.springboot.domain.counseling.entity.MergedArray;
-import com.mAInd.springboot.domain.counseling.entity.SentencePrediction;
-import com.mAInd.springboot.domain.counseling.entity.TotalPercentages;
+import com.mAInd.springboot.domain.counseling.entity.*;
 import com.mAInd.springboot.domain.counseling.repository.CounselingRepository;
 import com.mAInd.springboot.domain.surveys.repository.SurveysRepository;
 import lombok.RequiredArgsConstructor;
@@ -53,6 +50,14 @@ public class CounselingService {
         }
         counseling.clearMergedArrays();;
         counseling.setMergedArrays(newMergedArrays);
+
+        List<EmotionValues> newEmotionValues = requestDto.toEntityListEV(counseling);
+        if (newEmotionValues == null){
+            throw new IllegalArgumentException("새 EmotionValues 목록이 null입니다.");
+        }
+        counseling.clearEmotionValues();;
+        counseling.setEmotionValues(newEmotionValues);
+        counseling.update(requestDto.getOpinion()); //opinion update
 
         counselingRepository.save(counseling);
         return counseling.getCounseling_id();

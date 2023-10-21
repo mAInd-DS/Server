@@ -1,9 +1,10 @@
 package com.mAInd.springboot.domain.counseling.dto;
 
-import com.mAInd.springboot.domain.counseling.entity.Counseling;
-import com.mAInd.springboot.domain.counseling.entity.MergedArray;
-import com.mAInd.springboot.domain.counseling.entity.SentencePrediction;
-import com.mAInd.springboot.domain.counseling.entity.TotalPercentages;
+import com.mAInd.springboot.domain.counseling.dto.List.EmotionValuesDto;
+import com.mAInd.springboot.domain.counseling.dto.List.MergedArrayDto;
+import com.mAInd.springboot.domain.counseling.dto.List.SentencePredictionDto;
+import com.mAInd.springboot.domain.counseling.dto.List.TotalPercentagesDto;
+import com.mAInd.springboot.domain.counseling.entity.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,10 +22,18 @@ public class CounselingUpdateRequestDto {
     private List<TotalPercentagesDto> total_percentages;
     private List<MergedArrayDto> merged_array;
 
+    private List<EmotionValuesDto> emotion_values;
+    private String opinion;
+
     @Builder
-    public CounselingUpdateRequestDto(List<SentencePredictionDto> sentence_predictions, List<TotalPercentagesDto> total_percentages) {
+    public CounselingUpdateRequestDto(List<SentencePredictionDto> sentence_predictions, List<TotalPercentagesDto> total_percentages,
+                                      List<MergedArrayDto> merged_array, List<EmotionValuesDto> emotion_values,
+                                      String opinion) {
         this.sentence_predictions = sentence_predictions;
         this.total_percentages = total_percentages;
+        this.merged_array = merged_array;
+        this.emotion_values = emotion_values;
+        this.opinion = opinion;
     }
 
     public List<SentencePrediction> toEntityListSP(Counseling counseling) {
@@ -93,4 +102,19 @@ public class CounselingUpdateRequestDto {
         return mergedArraysEntities;
     }
 
+    public List<EmotionValues> toEntityListEV(Counseling counseling) {
+        if (emotion_values == null) {
+            log.info("emotion_values == null");
+            return Collections.emptyList(); // 빈 리스트 반환 또는 예외 처리
+        }
+
+        List<EmotionValues> emotionValuesEntities = emotion_values.stream()
+                .map(dto -> {
+                    EmotionValues entity = dto.toEntity();
+                    entity.setCounseling(counseling);
+                    return entity;
+                })
+                .collect(Collectors.toList());
+        return emotionValuesEntities;
+    }
 }

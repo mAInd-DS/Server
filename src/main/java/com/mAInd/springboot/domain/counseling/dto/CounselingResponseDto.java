@@ -1,5 +1,9 @@
 package com.mAInd.springboot.domain.counseling.dto;
 
+import com.mAInd.springboot.domain.counseling.dto.List.EmotionValuesDto;
+import com.mAInd.springboot.domain.counseling.dto.List.MergedArrayDto;
+import com.mAInd.springboot.domain.counseling.dto.List.SentencePredictionDto;
+import com.mAInd.springboot.domain.counseling.dto.List.TotalPercentagesDto;
 import com.mAInd.springboot.domain.counseling.entity.Counseling;
 import lombok.Getter;
 
@@ -17,9 +21,12 @@ public class CounselingResponseDto {
     private Long endHour;
     private Long endMin;
     private Long countNum;
+
+    private String opinion;
     private List<SentencePredictionDto> sentence_predictions;
     private List<TotalPercentagesDto> total_percentages;
     private List<MergedArrayDto> merged_array;
+    private List<EmotionValuesDto> emotion_values;
 
     public CounselingResponseDto(Counseling entity){
         this.counseling_id = entity.getCounseling_id();
@@ -30,6 +37,7 @@ public class CounselingResponseDto {
         this.endHour = entity.getEndHour();
         this.endMin = entity.getEndMin();
         this.countNum = entity.getCountNum();
+        this.opinion = entity.getOpinion();
         this.sentence_predictions = entity.getSentencePredictions()
                 .stream()
                 .map(SentencePredictionDto::new)
@@ -41,6 +49,10 @@ public class CounselingResponseDto {
         this.merged_array = entity.getMergedArrays()
                 .stream()
                 .map(MergedArrayDto::new)
+                .collect(Collectors.toList());
+        this.emotion_values = entity.getEmotionValues()
+                .stream()
+                .map(EmotionValuesDto::new)
                 .collect(Collectors.toList());
     }
 
