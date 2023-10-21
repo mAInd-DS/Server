@@ -12,17 +12,19 @@ public class SentencePredictionDto {
     private String sentence;
     private String emotion;
 
-    private Counseling counseling;
-
     @Builder
-    public SentencePredictionDto(String sentence, String emotion, Counseling counseling) {
+    public SentencePredictionDto(String sentence, String emotion) {
         this.sentence = sentence;
         this.emotion = emotion;
-        this.counseling = counseling;
+    }
+
+    public SentencePredictionDto(SentencePrediction entity) {
+        this.sentence = entity.getSentence();
+        this.emotion = entity.getEmotion();
     }
 
 
     public SentencePrediction toEntity() {
-        return new SentencePrediction(sentence, emotion, counseling);
+        return new SentencePrediction(sentence, emotion);
     }
 }

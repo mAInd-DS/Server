@@ -1,10 +1,12 @@
 package com.mAInd.springboot.domain.counseling.dto;
 
 import com.mAInd.springboot.domain.counseling.entity.Counseling;
-import com.mAInd.springboot.domain.surveys.entity.Surveys;
+import com.mAInd.springboot.domain.counseling.entity.SentencePrediction;
 import lombok.Getter;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 public class CounselingResponseDto {
@@ -16,6 +18,8 @@ public class CounselingResponseDto {
     private Long endHour;
     private Long endMin;
     private Long countNum;
+    private List<SentencePredictionDto> sentence_predictions;
+
     public CounselingResponseDto(Counseling entity){
         this.counseling_id = entity.getCounseling_id();
         this.surveyId = entity.getSurveyId();
@@ -25,6 +29,11 @@ public class CounselingResponseDto {
         this.endHour = entity.getEndHour();
         this.endMin = entity.getEndMin();
         this.countNum = entity.getCountNum();
+        this.sentence_predictions = entity.getSentencePredictions()
+                .stream()
+                .map(SentencePredictionDto::new)
+                .collect(Collectors.toList());
     }
+
 
 }

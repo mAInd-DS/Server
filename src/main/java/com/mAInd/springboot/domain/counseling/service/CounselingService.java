@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,20 +31,12 @@ public class CounselingService {
             throw new IllegalArgumentException("해당 상담이 없습니다. survey_id=" + survey_id + ", countNum=" + countNum);
         }
 
-        // Convert and set the new SentencePredictions
         List<SentencePrediction> newSentencePredictions = requestDto.toEntityList(counseling);
-
         if (newSentencePredictions == null) {
             throw new IllegalArgumentException("새 SentencePredictions 목록이 null입니다.");
         }
-
-        // Clear existing SentencePredictions
         counseling.clearSentencePredictions();
-
-        // Set new SentencePredictions
         counseling.setSentencePredictions(newSentencePredictions);
-
-        // Save the counseling entity (including SentencePredictions)
         counselingRepository.save(counseling);
 
         return counseling.getCounseling_id();

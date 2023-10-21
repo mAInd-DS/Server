@@ -27,10 +27,9 @@ public class SentencePrediction {
     private Counseling counseling;
 
     @Builder
-    public SentencePrediction(String sentence, String emotion, Counseling counseling) {
+    public SentencePrediction(String sentence, String emotion) {
         this.sentence = sentence;
         this.emotion = emotion;
-        this.counseling = counseling;
     }
 
     public void setCounseling(Counseling counseling) {

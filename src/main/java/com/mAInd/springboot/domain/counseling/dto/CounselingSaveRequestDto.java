@@ -19,10 +19,6 @@ public class CounselingSaveRequestDto {
     private Long endMin;
     private Long countNum;
 
-//    public void setSurveyId(Surveys survey){
-//        this.survey_id = survey;
-//    }
-
     @Builder
     public CounselingSaveRequestDto(Long surveyId, Date date, Long startHour, Long startMin,
                                     Long endHour, Long endMin, Long countNum){

@@ -1,9 +1,11 @@
 package com.mAInd.springboot.domain.counseling.controller;
 
 import com.mAInd.springboot.domain.counseling.dto.CounselingListResponseDto;
+import com.mAInd.springboot.domain.counseling.dto.CounselingResponseDto;
 import com.mAInd.springboot.domain.counseling.dto.CounselingSaveRequestDto;
 import com.mAInd.springboot.domain.counseling.dto.CounselingUpdateRequestDto;
 import com.mAInd.springboot.domain.counseling.service.CounselingService;
+import com.mAInd.springboot.domain.surveys.dto.SurveysResponseDto;
 import com.mAInd.springboot.domain.surveys.service.SurveysService;
 import com.mAInd.springboot.domain.user.entity.Users;
 import com.mAInd.springboot.domain.user.repository.UserRepository;
@@ -26,7 +28,6 @@ public class CounselingController {
 
     private final CounselingService counselingService;
     private final UserRepository userRepository;
-    private final SurveysService surveysService;
 
 
     @PostMapping("/counseling/upload")
@@ -55,6 +56,12 @@ public class CounselingController {
     public Long update(@PathVariable Long survey_id, @PathVariable Long countNum, @RequestBody CounselingUpdateRequestDto requestDto){
         log.info("Received request: " + requestDto.toString()); // 요청을 로그로 출력
         return counselingService.update(survey_id, countNum, requestDto);
+    }
+
+
+    @GetMapping("/counseling/{counseling_id}")
+    public CounselingResponseDto findById(@PathVariable Long counseling_id){
+        return counselingService.findById(counseling_id);
     }
 
 

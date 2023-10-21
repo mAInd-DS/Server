@@ -47,6 +47,7 @@ public class Counseling {
     @Column(length=5,nullable = false)
     private Long countNum;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "counseling", cascade = CascadeType.ALL)
     @Column
     private List<SentencePrediction> sentencePredictions = new ArrayList<SentencePrediction>();
@@ -64,18 +65,6 @@ public class Counseling {
         this.sentencePredictions = sentencePredictions;
     }
 
-
-    public void setSentencePredictions(List<SentencePrediction> newSentencePredictions) {
-        if (newSentencePredictions == null) {
-            this.sentencePredictions = new ArrayList<>(); // 빈 리스트 생성
-            log.info("Created a new sentencePredictions list");
-
-        } else {
-            this.sentencePredictions = newSentencePredictions; // 새로운 리스트 설정
-            log.info("Set sentencePredictions to a new list");
-        }
-    }
-
     public void clearSentencePredictions() {
         if (this.sentencePredictions != null) {
             log.info("clear sentence predictions");
@@ -83,11 +72,15 @@ public class Counseling {
         }
     }
 
-    public void updateSentencePredictions(List<SentencePrediction> newSentencePredictions) {
-        // Clear existing SentencePredictions
-        this.sentencePredictions.clear();
-
-        // Set new SentencePredictions
-        this.sentencePredictions.addAll(newSentencePredictions);
+    public void setSentencePredictions(List<SentencePrediction> newSentencePredictions) {
+        if (newSentencePredictions == null) {
+            this.sentencePredictions = new ArrayList<>(); // 빈 리스트 생성
+            log.info("Created a new sentencePredictions list");
+        } else {
+            this.sentencePredictions = newSentencePredictions; // 새로운 리스트 설정
+            log.info("Set sentencePredictions to a new list");
+        }
     }
+
+
 }

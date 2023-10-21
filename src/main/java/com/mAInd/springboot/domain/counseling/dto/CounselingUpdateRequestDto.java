@@ -33,10 +33,6 @@ public class CounselingUpdateRequestDto {
             log.info("Sentence: " + dto.getSentence() + ", Emotion: " + dto.getEmotion());
         });
 
-//        return sentence_predictions.stream()
-//                .map(SentencePredictionDto::toEntity)
-//                .collect(Collectors.toList());
-
 
         List<SentencePrediction> sentencePredictionEntities = sentence_predictions.stream()
                 .map(dto -> {
