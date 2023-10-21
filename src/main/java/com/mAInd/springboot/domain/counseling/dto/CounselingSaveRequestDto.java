@@ -11,7 +11,7 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 public class CounselingSaveRequestDto {
-    private Long survey_id;
+    private Long surveyId;
     private Date date;
     private Long startHour;
     private Long startMin;
@@ -24,9 +24,9 @@ public class CounselingSaveRequestDto {
 //    }
 
     @Builder
-    public CounselingSaveRequestDto(Long survey_id, Date date, Long startHour, Long startMin,
+    public CounselingSaveRequestDto(Long surveyId, Date date, Long startHour, Long startMin,
                                     Long endHour, Long endMin, Long countNum){
-        this.survey_id = survey_id;
+        this.surveyId = surveyId;
         this.date = date;
         this.startHour = startHour;
         this.startMin = startMin;
@@ -37,7 +37,7 @@ public class CounselingSaveRequestDto {
 
     public Counseling toEntity(){
         return Counseling.builder()
-                .survey_id(survey_id)
+                .surveyId(surveyId)
                 .date(date)
                 .startHour(startHour)
                 .startMin(startMin)

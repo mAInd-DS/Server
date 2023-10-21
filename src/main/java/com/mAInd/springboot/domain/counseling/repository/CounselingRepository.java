@@ -12,4 +12,6 @@ public interface CounselingRepository extends JpaRepository<Counseling, Long> {
     @Query("SELECT c FROM Counseling c ORDER BY c.id DESC")
     List<Surveys> findAllDesc();
 
+    Counseling findBySurveyIdAndCountNum(Long survey_id, Long countNum);
+
 }

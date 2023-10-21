@@ -23,13 +23,17 @@ public class SentencePrediction {
     private String emotion;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "result_id")
-    private Results results;
+    @JoinColumn(name = "counseling_id")
+    private Counseling counseling;
 
     @Builder
-    public SentencePrediction(String sentence, String emotion, Results results) {
+    public SentencePrediction(String sentence, String emotion, Counseling counseling) {
         this.sentence = sentence;
         this.emotion = emotion;
-        this.results =results;
+        this.counseling = counseling;
+    }
+
+    public void setCounseling(Counseling counseling) {
+        this.counseling = counseling;
     }
 }

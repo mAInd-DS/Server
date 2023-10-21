@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 public class CounselingResponseDto {
     private Long counseling_id;
-    private Long survey_id;
+    private Long surveyId;
     private Date date;
     private Long startHour;
     private Long startMin;
@@ -18,7 +18,7 @@ public class CounselingResponseDto {
     private Long countNum;
     public CounselingResponseDto(Counseling entity){
         this.counseling_id = entity.getCounseling_id();
-        this.survey_id = entity.getSurvey_id();
+        this.surveyId = entity.getSurveyId();
         this.date = entity.getDate();
         this.startHour = entity.getStartHour();
         this.startMin = entity.getStartMin();
