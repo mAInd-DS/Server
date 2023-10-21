@@ -3,6 +3,7 @@ package com.mAInd.springboot.domain.counseling.service;
 import com.mAInd.springboot.domain.counseling.dto.*;
 import com.mAInd.springboot.domain.counseling.entity.Counseling;
 import com.mAInd.springboot.domain.counseling.entity.SentencePrediction;
+import com.mAInd.springboot.domain.counseling.entity.TotalPercentages;
 import com.mAInd.springboot.domain.counseling.repository.CounselingRepository;
 import com.mAInd.springboot.domain.surveys.repository.SurveysRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,14 +32,21 @@ public class CounselingService {
             throw new IllegalArgumentException("해당 상담이 없습니다. survey_id=" + survey_id + ", countNum=" + countNum);
         }
 
-        List<SentencePrediction> newSentencePredictions = requestDto.toEntityList(counseling);
+        List<SentencePrediction> newSentencePredictions = requestDto.toEntityListSP(counseling);
         if (newSentencePredictions == null) {
             throw new IllegalArgumentException("새 SentencePredictions 목록이 null입니다.");
         }
         counseling.clearSentencePredictions();
         counseling.setSentencePredictions(newSentencePredictions);
-        counselingRepository.save(counseling);
 
+        List<TotalPercentages> newTotalPercentages = requestDto.toEntityListTP(counseling);
+        if (newTotalPercentages == null){
+            throw new IllegalArgumentException("새 TotalPercentages 목록이 null입니다.");
+        }
+        counseling.clearTotalPercentages();;
+        counseling.setTotalPercentages(newTotalPercentages);
+
+        counselingRepository.save(counseling);
         return counseling.getCounseling_id();
     }
 

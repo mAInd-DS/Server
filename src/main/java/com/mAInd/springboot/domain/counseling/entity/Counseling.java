@@ -52,9 +52,17 @@ public class Counseling {
     @Column
     private List<SentencePrediction> sentencePredictions = new ArrayList<SentencePrediction>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "counseling", cascade = CascadeType.ALL)
+    @Column
+    private List<TotalPercentages> totalPercentages = new ArrayList<TotalPercentages>();
+
+
     @Builder
     public Counseling(Long surveyId, Date date, Long startHour, Long startMin,
-                      Long endHour, Long endMin, Long countNum, List<SentencePrediction> sentencePredictions){
+                      Long endHour, Long endMin, Long countNum,
+                      List<SentencePrediction> sentencePredictions,
+                      List<TotalPercentages> totalPercentages){
         this.surveyId = surveyId;
         this.date = date;
         this.startHour = startHour;
@@ -63,6 +71,7 @@ public class Counseling {
         this.endMin = endMin;
         this.countNum = countNum;
         this.sentencePredictions = sentencePredictions;
+        this.totalPercentages = totalPercentages;
     }
 
     public void clearSentencePredictions() {
@@ -79,6 +88,23 @@ public class Counseling {
         } else {
             this.sentencePredictions = newSentencePredictions; // 새로운 리스트 설정
             log.info("Set sentencePredictions to a new list");
+        }
+    }
+
+    public void clearTotalPercentages(){
+        if(this.totalPercentages != null){
+            log.info("clear total percentages");
+            this.totalPercentages.clear();
+        }
+    }
+
+    public void setTotalPercentages(List<TotalPercentages> newTotalPercentages){
+        if(newTotalPercentages == null){
+            this.totalPercentages = new ArrayList<>();
+            log.info("Created a new totalPercentages list");
+        }else{
+            this.totalPercentages = newTotalPercentages;
+            log.info("Set totalPercentages to a new list");
         }
     }
 

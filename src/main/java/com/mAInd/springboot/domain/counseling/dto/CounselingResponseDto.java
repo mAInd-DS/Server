@@ -19,6 +19,7 @@ public class CounselingResponseDto {
     private Long endMin;
     private Long countNum;
     private List<SentencePredictionDto> sentence_predictions;
+    private List<TotalPercentagesDto> total_percentages;
 
     public CounselingResponseDto(Counseling entity){
         this.counseling_id = entity.getCounseling_id();
@@ -32,6 +33,10 @@ public class CounselingResponseDto {
         this.sentence_predictions = entity.getSentencePredictions()
                 .stream()
                 .map(SentencePredictionDto::new)
+                .collect(Collectors.toList());
+        this.total_percentages = entity.getTotalPercentages()
+                .stream()
+                .map(TotalPercentagesDto::new)
                 .collect(Collectors.toList());
     }
 
