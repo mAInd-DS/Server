@@ -2,10 +2,7 @@ package com.mAInd.springboot.domain.mypage.service;
 
 import com.mAInd.springboot.domain.counseling.entity.Counseling;
 import com.mAInd.springboot.domain.counseling.repository.CounselingRepository;
-import com.mAInd.springboot.domain.mypage.dto.ClientInfoResponseDto;
-import com.mAInd.springboot.domain.mypage.dto.IndividualCounselingListResponseDto;
-import com.mAInd.springboot.domain.mypage.dto.MyInfoResponseDto;
-import com.mAInd.springboot.domain.mypage.dto.MyStatusResponseDto;
+import com.mAInd.springboot.domain.mypage.dto.*;
 import com.mAInd.springboot.domain.surveys.dto.SurveysResponseDto;
 import com.mAInd.springboot.domain.surveys.entity.Surveys;
 import com.mAInd.springboot.domain.surveys.repository.SurveysRepository;
@@ -67,6 +64,20 @@ public class MyPageService {
         return counselingEntities.stream()
                 .map(counselingEntity -> new IndividualCounselingListResponseDto(counselingEntity, surveyEntity))
                 .collect(Collectors.toList());
+    }
+
+
+    @Transactional
+    public CounselingResultResponseDto getResult(Long counseling_id){
+        Counseling counselingEntity = counselingRepository.findById(counseling_id)
+                .orElseThrow(()-> new
+                        IllegalArgumentException("해당 상담 내역이 없습니다. counseling_id=" + counseling_id));
+
+        Surveys surveyEntity = surveysRepository.findById(counselingEntity.getSurveyId())
+                .orElseThrow(()-> new
+                        IllegalArgumentException("해당 설문지가 없습니다. survey_id=" + counselingEntity.getSurveyId()));
+
+        return new CounselingResultResponseDto(counselingEntity, surveyEntity);
     }
 
 
