@@ -2,6 +2,7 @@ package com.mAInd.springboot.domain.mypage.controller;
 
 import com.mAInd.springboot.domain.mypage.dto.*;
 import com.mAInd.springboot.domain.mypage.service.MyPageService;
+import com.mAInd.springboot.domain.surveys.dto.SurveysUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -39,4 +40,10 @@ public class MyPageController {
     public CounselingResultResponseDto getResult(@PathVariable Long counseling_id){
         return myPageService.getResult(counseling_id);
     }
+
+    @PutMapping("/mypage/counseling/result/{counseling_id}/opinion")
+    public Long update(@PathVariable Long counseling_id, @RequestBody ResultOpinionUpdateRequestDto requestDto){
+        return myPageService.updateOpinion(counseling_id, requestDto);
+    }
+
 }

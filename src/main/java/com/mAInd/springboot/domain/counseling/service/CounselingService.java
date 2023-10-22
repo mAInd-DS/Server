@@ -37,6 +37,9 @@ public class CounselingService {
         counseling.clearSentencePredictions();
         counseling.setSentencePredictions(newSentencePredictions);
 
+
+
+
         List<TotalPercentages> newTotalPercentages = requestDto.toEntityListTP(counseling);
         if (newTotalPercentages == null){
             throw new IllegalArgumentException("새 TotalPercentages 목록이 null입니다.");
@@ -61,6 +64,32 @@ public class CounselingService {
 
         counselingRepository.save(counseling);
         return counseling.getCounseling_id();
+//
+//        // Clear and update sentence predictions
+//        List<SentencePrediction> newSentencePredictions = requestDto.toEntityListSP(counseling);
+//        counseling.getSentencePredictions().clear();
+//        counseling.getSentencePredictions().addAll(newSentencePredictions);
+//
+//        // Clear and update total percentages
+//        List<TotalPercentages> newTotalPercentages = requestDto.toEntityListTP(counseling);
+//        counseling.getTotalPercentages().clear();
+//        counseling.getTotalPercentages().addAll(newTotalPercentages);
+//
+//        // Clear and update merged arrays
+//        List<MergedArray> newMergedArrays = requestDto.toEntityListMA(counseling);
+//        counseling.getMergedArrays().clear();
+//        counseling.getMergedArrays().addAll(newMergedArrays);
+//
+//        // Clear and update emotion values
+//        List<EmotionValues> newEmotionValues = requestDto.toEntityListEV(counseling);
+//        counseling.getEmotionValues().clear();
+//        counseling.getEmotionValues().addAll(newEmotionValues);
+//
+//        counseling.update(requestDto.getOpinion());
+//
+//        counselingRepository.save(counseling);
+//        return counseling.getCounseling_id();
+
     }
 
 

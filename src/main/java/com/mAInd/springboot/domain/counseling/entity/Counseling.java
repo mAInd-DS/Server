@@ -92,7 +92,7 @@ public class Counseling {
         this.emotionValues = emotionValues;
     }
 
-    public void update(String opinion){
+    public void update(String opinion) {
         this.opinion = opinion;
     }
 

@@ -80,6 +80,15 @@ public class MyPageService {
         return new CounselingResultResponseDto(counselingEntity, surveyEntity);
     }
 
+    @Transactional
+    public Long updateOpinion(Long counseling_id, ResultOpinionUpdateRequestDto requestDto){
+        Counseling counseling = counselingRepository.findById(counseling_id)
+                .orElseThrow(()-> new
+                        IllegalArgumentException("해당 상담 내역이 없습니다. counseling_id=" + counseling_id));
+        counseling.update(requestDto.getOpinion());
+        return counseling_id;
+    }
+
 
     public Users findUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

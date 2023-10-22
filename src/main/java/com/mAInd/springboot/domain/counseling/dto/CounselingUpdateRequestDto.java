@@ -43,9 +43,9 @@ public class CounselingUpdateRequestDto {
         }
 
         log.info("Converting sentence predictions to entities:");
-        sentence_predictions.forEach(dto -> {
-            log.info("Sentence: " + dto.getSentence() + ", Emotion: " + dto.getEmotion());
-        });
+//        sentence_predictions.forEach(dto -> {
+//            log.info("Sentence: " + dto.getSentence() + ", Emotion: " + dto.getEmotion());
+//        });
 
 
         List<SentencePrediction> sentencePredictionEntities = sentence_predictions.stream()
@@ -65,9 +65,9 @@ public class CounselingUpdateRequestDto {
         }
 
         log.info("Converting total_percentages to entities:");
-        total_percentages.forEach(dto -> {
-            log.info("Emotion: " + dto.getEmotion() + ", Percentage: " + dto.getPercentage());
-        });
+//        total_percentages.forEach(dto -> {
+//            log.info("Emotion: " + dto.getEmotion() + ", Percentage: " + dto.getPercentage());
+//        });
 
 
         List<TotalPercentages> totalPercentageEntities = total_percentages.stream()
@@ -87,9 +87,9 @@ public class CounselingUpdateRequestDto {
         }
 
         log.info("Converting merged_array to entities:");
-        merged_array.forEach(dto -> {
-            log.info("speakers: " + dto.getSpeakers() + ", Sentences: " + dto.getSentence());
-        });
+//        merged_array.forEach(dto -> {
+//            log.info("speakers: " + dto.getSpeakers() + ", Sentences: " + dto.getSentence());
+//        });
 
 
         List<MergedArray> mergedArraysEntities = merged_array.stream()
