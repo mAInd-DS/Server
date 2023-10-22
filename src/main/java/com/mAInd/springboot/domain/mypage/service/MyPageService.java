@@ -1,6 +1,9 @@
 package com.mAInd.springboot.domain.mypage.service;
 
+import com.mAInd.springboot.domain.counseling.entity.Counseling;
+import com.mAInd.springboot.domain.counseling.repository.CounselingRepository;
 import com.mAInd.springboot.domain.mypage.dto.ClientInfoResponseDto;
+import com.mAInd.springboot.domain.mypage.dto.IndividualCounselingListResponseDto;
 import com.mAInd.springboot.domain.mypage.dto.MyInfoResponseDto;
 import com.mAInd.springboot.domain.mypage.dto.MyStatusResponseDto;
 import com.mAInd.springboot.domain.surveys.dto.SurveysResponseDto;
@@ -16,8 +19,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -26,6 +32,7 @@ public class MyPageService {
 
     private final UserRepository userRepository;
     private final SurveysRepository  surveysRepository;
+    private final CounselingRepository counselingRepository;
 
     @Transactional
     public MyInfoResponseDto getMyInfo(){
@@ -47,6 +54,19 @@ public class MyPageService {
                 .orElseThrow(()-> new
                         IllegalArgumentException("해당 설문지가 없습니다. survey_id=" + survey_id));
         return new ClientInfoResponseDto(entity);
+    }
+
+    @Transactional
+    public List<IndividualCounselingListResponseDto> findIndividualCounselingListBySurveyId(Long surveyId){
+        List<Counseling> counselingEntities = counselingRepository.findBySurveyId(surveyId);
+
+        Surveys surveyEntity = surveysRepository.findById(surveyId)
+                .orElseThrow(()-> new
+                        IllegalArgumentException("해당 설문지가 없습니다. survey_id=" + surveyId));
+
+        return counselingEntities.stream()
+                .map(counselingEntity -> new IndividualCounselingListResponseDto(counselingEntity, surveyEntity))
+                .collect(Collectors.toList());
     }
 
 
