@@ -1,6 +1,5 @@
 package com.mAInd.springboot.domain.counseling.entity;
 
-import com.mAInd.springboot.domain.surveys.entity.Surveys;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static javax.persistence.FetchType.LAZY;
 
 
 @Slf4j
@@ -71,13 +69,18 @@ public class Counseling {
     private List<EmotionValues> emotionValues = new ArrayList<EmotionValues>();
 
 
+    @Enumerated(EnumType.STRING)
+    @Column
+    private ResultOfferStatus resultOfferStatus;
+
     @Builder
     public Counseling(Long surveyId, Date date, Long startHour, Long startMin,
                       Long endHour, Long endMin, Long countNum, String opinion,
                       List<SentencePrediction> sentencePredictions,
                       List<TotalPercentages> totalPercentages,
                       List<MergedArray> mergedArrays,
-                      List<EmotionValues> emotionValues){
+                      List<EmotionValues> emotionValues,
+                      ResultOfferStatus resultOfferStatus){
         this.surveyId = surveyId;
         this.date = date;
         this.startHour = startHour;
@@ -90,10 +93,15 @@ public class Counseling {
         this.totalPercentages = totalPercentages;
         this.mergedArrays = mergedArrays;
         this.emotionValues = emotionValues;
+        this.resultOfferStatus = resultOfferStatus;
     }
 
-    public void update(String opinion) {
+    public void updateOpinion(String opinion) {
         this.opinion = opinion;
+    }
+
+    public void updateStatus(ResultOfferStatus resultOfferStatus){
+        this.resultOfferStatus = resultOfferStatus;
     }
 
 

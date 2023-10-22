@@ -37,9 +37,6 @@ public class CounselingService {
         counseling.clearSentencePredictions();
         counseling.setSentencePredictions(newSentencePredictions);
 
-
-
-
         List<TotalPercentages> newTotalPercentages = requestDto.toEntityListTP(counseling);
         if (newTotalPercentages == null){
             throw new IllegalArgumentException("새 TotalPercentages 목록이 null입니다.");
@@ -60,7 +57,6 @@ public class CounselingService {
         }
         counseling.clearEmotionValues();;
         counseling.setEmotionValues(newEmotionValues);
-        counseling.update(requestDto.getOpinion()); //opinion update
 
         counselingRepository.save(counseling);
         return counseling.getCounseling_id();

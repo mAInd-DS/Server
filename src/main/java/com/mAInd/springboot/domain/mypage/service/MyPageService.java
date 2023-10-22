@@ -85,7 +85,16 @@ public class MyPageService {
         Counseling counseling = counselingRepository.findById(counseling_id)
                 .orElseThrow(()-> new
                         IllegalArgumentException("해당 상담 내역이 없습니다. counseling_id=" + counseling_id));
-        counseling.update(requestDto.getOpinion());
+        counseling.updateOpinion(requestDto.getOpinion());
+        return counseling_id;
+    }
+
+    @Transactional
+    public Long updateResultOfferStatus(Long counseling_id, ResultOfferStatusUpdateRequestDto requestDto) {
+        Counseling counseling = counselingRepository.findById(counseling_id)
+                .orElseThrow(()-> new
+                        IllegalArgumentException("해당 상담 내역이 없습니다. counseling_id=" + counseling_id));
+        counseling.updateStatus(requestDto.getResultOfferStatus());
         return counseling_id;
     }
 
@@ -109,8 +118,6 @@ public class MyPageService {
         Surveys survey = surveysRepository.findLatestSurveyByClientId(user_id);
         return survey;
     }
-
-
 
 }
 

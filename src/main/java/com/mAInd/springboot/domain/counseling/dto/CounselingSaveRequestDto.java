@@ -1,7 +1,7 @@
 package com.mAInd.springboot.domain.counseling.dto;
 
 import com.mAInd.springboot.domain.counseling.entity.Counseling;
-import com.mAInd.springboot.domain.surveys.entity.Surveys;
+import com.mAInd.springboot.domain.counseling.entity.ResultOfferStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,6 +40,7 @@ public class CounselingSaveRequestDto {
                 .endHour(endHour)
                 .endMin(endMin)
                 .countNum(countNum)
+                .resultOfferStatus(ResultOfferStatus.BEFORE)
                 .build();
     }
 
