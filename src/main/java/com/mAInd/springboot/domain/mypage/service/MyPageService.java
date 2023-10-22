@@ -1,5 +1,6 @@
 package com.mAInd.springboot.domain.mypage.service;
 
+import com.mAInd.springboot.domain.mypage.dto.ClientInfoResponseDto;
 import com.mAInd.springboot.domain.mypage.dto.MyInfoResponseDto;
 import com.mAInd.springboot.domain.mypage.dto.MyStatusResponseDto;
 import com.mAInd.springboot.domain.surveys.dto.SurveysResponseDto;
@@ -40,6 +41,14 @@ public class MyPageService {
         return new MyStatusResponseDto(user, survey);
     }
 
+    @Transactional
+    public ClientInfoResponseDto getClientInfo(Long survey_id) {
+        Surveys entity = surveysRepository.findById(survey_id)
+                .orElseThrow(()-> new
+                        IllegalArgumentException("해당 설문지가 없습니다. survey_id=" + survey_id));
+        return new ClientInfoResponseDto(entity);
+    }
+
 
     public Users findUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -60,6 +69,7 @@ public class MyPageService {
         Surveys survey = surveysRepository.findLatestSurveyByClientId(user_id);
         return survey;
     }
+
 
 
 }

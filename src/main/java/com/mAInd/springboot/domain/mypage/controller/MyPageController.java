@@ -1,15 +1,12 @@
 package com.mAInd.springboot.domain.mypage.controller;
 
+import com.mAInd.springboot.domain.mypage.dto.ClientInfoResponseDto;
 import com.mAInd.springboot.domain.mypage.dto.MyInfoResponseDto;
 import com.mAInd.springboot.domain.mypage.dto.MyStatusResponseDto;
 import com.mAInd.springboot.domain.mypage.service.MyPageService;
-import com.mAInd.springboot.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @CrossOrigin
@@ -27,4 +24,14 @@ public class MyPageController {
     @GetMapping("/mypage/status")
     public MyStatusResponseDto getMyStatus() {
         return myPageService.getMyStatus();}
+
+    @GetMapping("/mypage/clientInfo/{survey_id}")
+    public ClientInfoResponseDto getClientInfo(@PathVariable Long survey_id){
+        return myPageService.getClientInfo(survey_id);
+    }
+
+//    @GetMapping("/mypage/{survey_id}/counseling/list")
+//    public List<PersonalCounselingListResponseDto> findAll(){
+//        return myPageService.findAllDesc();
+//    }
 }

@@ -73,9 +73,9 @@ public class CounselingService {
     }
 
     @Transactional(readOnly = true)
-    public List<CounselingListResponseDto> findAcceptedSurveysByCounselorId(Long counselorId){
+    public List<ClientListResponseDto> findAcceptedSurveysByCounselorId(Long counselorId){
         return surveysRepository.findAcceptedSurveysByCounselorId(counselorId).stream()
-                .map(CounselingListResponseDto::new)
+                .map(ClientListResponseDto::new)
                 .collect(Collectors.toList());
     }
 
