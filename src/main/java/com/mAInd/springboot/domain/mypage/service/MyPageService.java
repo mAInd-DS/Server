@@ -3,7 +3,6 @@ package com.mAInd.springboot.domain.mypage.service;
 import com.mAInd.springboot.domain.counseling.entity.Counseling;
 import com.mAInd.springboot.domain.counseling.repository.CounselingRepository;
 import com.mAInd.springboot.domain.mypage.dto.*;
-import com.mAInd.springboot.domain.surveys.dto.SurveysResponseDto;
 import com.mAInd.springboot.domain.surveys.entity.Surveys;
 import com.mAInd.springboot.domain.surveys.repository.SurveysRepository;
 import com.mAInd.springboot.domain.user.entity.Users;
@@ -16,9 +15,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -98,6 +95,21 @@ public class MyPageService {
         return counseling_id;
     }
 
+    @Transactional(readOnly = true)
+    public List<ClientCounselingListResponseDto> findCounselingForClient() {
+        Users user = findUser();
+        Surveys survey = findSurvey(user);
+        Long surveyId = survey.getSurvey_id();
+
+        List<Counseling> counselingEntities = counselingRepository.findBySurveyId(surveyId);
+
+        List<ClientCounselingListResponseDto> responseDtos = counselingEntities.stream()
+                .map(counselingEntity -> new ClientCounselingListResponseDto(counselingEntity, surveysRepository))
+                .collect(Collectors.toList());
+
+        return responseDtos;
+    }
+
 
     public Users findUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -118,6 +130,7 @@ public class MyPageService {
         Surveys survey = surveysRepository.findLatestSurveyByClientId(user_id);
         return survey;
     }
+
 
 }
 
