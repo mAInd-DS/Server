@@ -25,15 +25,20 @@ public class CounselingUpdateRequestDto {
     private List<EmotionValuesDto> emotion_values;
     private String opinion;
 
+    private Long survey_id;
+    private Long countNum;
+
     @Builder
     public CounselingUpdateRequestDto(List<SentencePredictionDto> sentence_predictions, List<TotalPercentagesDto> total_percentages,
                                       List<MergedArrayDto> merged_array, List<EmotionValuesDto> emotion_values,
-                                      String opinion) {
+                                      String opinion,Long survey_id, Long countNum) {
         this.sentence_predictions = sentence_predictions;
         this.total_percentages = total_percentages;
         this.merged_array = merged_array;
         this.emotion_values = emotion_values;
         this.opinion = opinion;
+        this.survey_id = survey_id;
+        this.countNum = countNum;
     }
 
     public List<SentencePrediction> toEntityListSP(Counseling counseling) {
