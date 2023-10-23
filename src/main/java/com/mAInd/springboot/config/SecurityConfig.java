@@ -19,12 +19,15 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.security.web.firewall.DefaultHttpFirewall;
+import org.springframework.security.web.firewall.HttpFirewall;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,10 +50,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final OAuth2LoginFailureHandler oAuth2LoginFailureHandler;
     private final CustomOAuth2UserService customOAuth2UserService;
 
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers("/h2-console/**", "/favicon.ico");
-//    }
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.httpFirewall(allowUrlEncodedSlashHttpFirewall());
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -91,6 +94,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //        http.build();
     }
+
+    @Bean
+    public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
+        DefaultHttpFirewall firewall = new DefaultHttpFirewall();
+        firewall.setAllowUrlEncodedSlash(true); //역슬래시 허용
+        return firewall;
+    }
+
 
     /** [PART 1], Provider에 설정할 PasswordEncoder를 빈으로 등록 **/
     @Bean

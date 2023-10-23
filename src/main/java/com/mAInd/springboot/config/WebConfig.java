@@ -5,8 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.Arrays;
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -31,4 +29,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .exposedHeaders("Authorization", "Authorization-Refresh", "Content-Type", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
                 .allowedHeaders("Authorization", "Authorization-Refresh", "Content-Type", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials");
     }
+
+
+
+
 }
