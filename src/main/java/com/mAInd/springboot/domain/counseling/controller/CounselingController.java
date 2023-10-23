@@ -52,7 +52,7 @@ public class CounselingController {
 
 
     // 상담 결과 등록
-    @PutMapping("/counseling/{survey_id}/{countNum}")
+    @PostMapping("/counseling/{survey_id}/{countNum}")
     public Long update(@PathVariable Long survey_id, @PathVariable Long countNum, @RequestBody CounselingUpdateRequestDto requestDto){
         log.info("Received request: " + requestDto.toString()); // 요청을 로그로 출력
         return counselingService.update(survey_id, countNum, requestDto);
