@@ -102,7 +102,6 @@ public class MyPageService {
         Long surveyId = survey.getSurvey_id();
 
         List<Counseling> counselingEntities = counselingRepository.findBySurveyId(surveyId);
-
         List<ClientCounselingListResponseDto> responseDtos = counselingEntities.stream()
                 .map(counselingEntity -> new ClientCounselingListResponseDto(counselingEntity, surveysRepository))
                 .collect(Collectors.toList());
@@ -121,8 +120,7 @@ public class MyPageService {
                 return user;
             }
         }
-        // TODO: 예외처리
-        return null;
+        throw new RuntimeException("사용자를 찾을 수 없습니다.");
     }
 
     public Surveys findSurvey(Users user){
