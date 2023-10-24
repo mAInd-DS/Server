@@ -5,6 +5,7 @@ import com.mAInd.springboot.domain.counseling.dto.List.MergedArrayDto;
 import com.mAInd.springboot.domain.counseling.dto.List.SentencePredictionDto;
 import com.mAInd.springboot.domain.counseling.dto.List.TotalPercentagesDto;
 import com.mAInd.springboot.domain.counseling.entity.Counseling;
+import com.mAInd.springboot.domain.counseling.entity.ResultOfferStatus;
 import com.mAInd.springboot.domain.surveys.entity.Surveys;
 import com.mAInd.springboot.domain.user.entity.Users;
 import lombok.Getter;
@@ -32,6 +33,8 @@ public class CounselingResultResponseDto {
     private String counselorName;
 
     private String opinion;
+
+    private ResultOfferStatus resultOfferStatus;
     private List<SentencePredictionDto> sentence_predictions;
     private List<TotalPercentagesDto> total_percentages;
     private List<MergedArrayDto> merged_array;
@@ -49,6 +52,7 @@ public class CounselingResultResponseDto {
         this.clientName = surveyEntity.getClient_id().getName();
         this.counselorName = surveyEntity.getCounselor_id().getName();
         this.opinion = counselingEntity.getOpinion();
+        this.resultOfferStatus = counselingEntity.getResultOfferStatus();
         this.sentence_predictions = counselingEntity.getSentencePredictions()
                 .stream()
                 .map(SentencePredictionDto::new)
