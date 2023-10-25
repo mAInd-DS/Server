@@ -20,18 +20,18 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/profiles/save")
-    public String profilesSave(){
-        return "profiles-save";
-    }
-
-    @GetMapping("/profiles/update/{profile_id}")
-    public String profilesUpdate(@PathVariable Long profile_id, Model model){
-        ProfilesResponseDto dto = profilesService.findById(profile_id);
-        model.addAttribute("profile", dto);
-
-        return "profiles-update";
-    }
+//    @GetMapping("/profiles/save")
+//    public String profilesSave(){
+//        return "profiles-save";
+//    }
+//
+//    @GetMapping("/profiles/update/{profile_id}")
+//    public String profilesUpdate(@PathVariable Long profile_id, Model model){
+//        ProfilesResponseDto dto = profilesService.findById(profile_id);
+//        model.addAttribute("profile", dto);
+//
+//        return "profiles-update";
+//    }
 
     @GetMapping("/log")
     public void log(){
