@@ -63,7 +63,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
     }
 
     private String makeRedirectUrl(String token){
-        return UriComponentsBuilder.fromUriString("http://localhost:3000/oauth2/redirect/" + token)
+        return UriComponentsBuilder.fromUriString("https://maind.site/oauth2/redirect/" + token)
                 .build().toUriString();
     }
 }
